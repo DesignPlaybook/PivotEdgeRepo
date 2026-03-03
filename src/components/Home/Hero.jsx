@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import hero1 from "../assets/images/image3.jpg";
-import hero2 from "../assets/images/image2.jpg";
+import hero1 from "../../assets/images/image3.jpg";
+import hero2 from "../../assets/images/image2.jpg";
 
 const images = [hero1, hero2];
 

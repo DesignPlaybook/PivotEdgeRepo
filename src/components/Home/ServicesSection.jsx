@@ -24,32 +24,46 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-24 bg-brand-offwhite">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-12 text-center">
+        
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-semibold text-brand-teal mb-14 text-center">
           Our Services
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-start
-                transition-all duration-500 ease-out transform hover:scale-105 hover:shadow-2xl"
+              className="group bg-brand-ivory rounded-2xl p-8
+                border border-transparent
+                shadow-sm transition-all duration-500
+                hover:-translate-y-2 hover:shadow-xl hover:border-brand-gold"
             >
-              {service.icon && (
-                <div className="overflow-hidden rounded-full mb-4 w-20 h-20">
-                  <img
-                    src={service.icon}
-                    alt={service.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out transform hover:scale-110"
-                  />
-                </div>
-              )}
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              {/* Image */}
+              <div className="overflow-hidden rounded-xl mb-6">
+                <img
+                  src={service.icon}
+                  alt={service.title}
+                  className="h-48 w-full object-cover
+                    transition-transform duration-700 ease-out
+                    group-hover:scale-110"
+                />
+              </div>
+
+              {/* Content */}
+              <h3 className="text-xl font-semibold text-brand-charcoal mb-3">
                 {service.title}
               </h3>
-              <p className="text-gray-600">{service.description}</p>
+
+              <p className="text-brand-slate leading-relaxed">
+                {service.description}
+              </p>
+
+              {/* Accent line */}
+              <div className="mt-6 h-[2px] w-12 bg-brand-gold transition-all duration-500 group-hover:w-20" />
             </div>
           ))}
         </div>

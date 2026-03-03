@@ -1,8 +1,8 @@
 import React from "react";
-import executiveIcon from "../assets/images/image1.jpg";
-import leadershipIcon from "../assets/images/image1.jpg";
-import diversityIcon from "../assets/images/image1.jpg";
-import bg from '../assets/images/bg.webp'
+import executiveIcon from "../../assets/images/image1.jpg";
+import leadershipIcon from "../../assets/images/image1.jpg";
+import diversityIcon from "../../assets/images/image1.jpg";
+import bg from '../../assets/images/bg.webp'
 
 const servicesData = [
   {
@@ -55,7 +55,7 @@ const Services = () => {
 </section>
 
       {/* Services Cards */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 flex flex-col gap-20">
           {servicesData.map((service, index) => (
             <div

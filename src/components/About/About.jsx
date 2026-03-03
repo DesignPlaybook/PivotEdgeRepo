@@ -1,10 +1,10 @@
 import React from "react";
-import aboutHero from "../assets/images/teamwork.avif";
+import aboutHero from "../../assets/images/teamwork.avif";
 
 // Add icons for each card
-import missionIcon from "../assets/images/mission.jpg";
-import visionIcon from "../assets/images/version.jpg";
-import valuesIcon from "../assets/images/value.jpg";
+import missionIcon from "../../assets/images/mission.jpg";
+import visionIcon from "../../assets/images/version.jpg";
+import valuesIcon from "../../assets/images/value.jpg";
 
 const aboutData = [
   {
