@@ -20,3 +20,23 @@
     transform: translateY(0);
   }
 }
+/* Custom horizontal scrollbar – clean single line */
+
+.domains-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.domains-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.domains-scroll::-webkit-scrollbar-thumb {
+  background: #000; /* black line */
+  border-radius: 10px;
+}
+
+/* Firefox */
+.domains-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #000 transparent;
+}
