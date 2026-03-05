@@ -9,16 +9,16 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
 
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex justify-center md:justify-start w-full md:w-auto">
           <img
             src={logo}
             alt="Company Logo"
-            className="h-16 md:h-20 w-auto brightness-125 contrast-125 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+            className="h-14 md:h-20 w-auto brightness-125 contrast-125 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
           />
         </div>
 
         {/* Quick Links */}
-        <div className="flex flex-wrap gap-12">
+        <div className="w-full md:w-auto grid grid-cols-3 gap-6 text-center md:text-left">
 
           {/* Company */}
           <div>
@@ -51,20 +51,17 @@ const Footer = () => {
           </div>
 
         </div>
-
       </div>
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-6 mt-10 border-t border-white/10 pt-6">
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
 
-          {/* Copyright */}
-          <p className="text-gray-500 text-sm text-center md:text-left">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} CompanyName. All rights reserved.
           </p>
 
-          {/* Optional Social Icons */}
           <div className="flex gap-4 text-gray-400 text-sm">
             <span className="hover:text-white cursor-pointer transition">LinkedIn</span>
             <span className="hover:text-white cursor-pointer transition">Twitter</span>

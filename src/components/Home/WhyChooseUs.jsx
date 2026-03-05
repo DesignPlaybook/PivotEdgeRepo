@@ -81,7 +81,6 @@ const WhyChooseUs = () => {
               </span>
             </h2>
 
-            {/* Accent line */}
             <div className="w-16 h-1 bg-[#C9A23F] rounded-full"></div>
 
             <p className="text-[#6B7280] max-w-xl leading-relaxed text-[15px] md:text-base">
@@ -90,7 +89,6 @@ const WhyChooseUs = () => {
               network of professionals who understand evolving markets.
             </p>
 
-            {/* Highlight stats */}
             <div className="grid grid-cols-3 gap-6 pt-4 max-w-md">
 
               <div>
@@ -117,7 +115,7 @@ const WhyChooseUs = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: false }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-10"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10"
           >
             {points.map((item, index) => (
               <motion.div
@@ -127,43 +125,49 @@ const WhyChooseUs = () => {
               >
 
                 {/* CARD WRAPPER */}
-                <div className="relative w-full h-56 transition-transform duration-700 transform-style preserve-3d group-hover:rotate-y-180 hover:-translate-y-2">
+                <div className="relative w-full h-44 md:h-56 transition-transform duration-700 transform-style preserve-3d group-hover:rotate-y-180 hover:-translate-y-2">
 
                   {/* FRONT SIDE */}
-                  <div className="absolute inset-0 backface-hidden bg-[#F3F3F0] rounded-2xl p-8 border-4 border-[#EFE6CF] shadow-[0_18px_45px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:border-[#0F4C5C] group-hover:shadow-[0_0_0_3px_rgba(15,76,92,0.15)]">
+                  <div className="absolute inset-0 backface-hidden bg-[#F3F3F0] rounded-2xl p-5 md:p-8 border-4 border-[#EFE6CF] shadow-[0_18px_45px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:border-[#0F4C5C] group-hover:shadow-[0_0_0_3px_rgba(15,76,92,0.15)]">
 
-                    <motion.div
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.3,
-                      }}
-                      whileHover={{ y: 0 }}
-                    >
-                      <div className="text-2xl mb-4 text-[#5B6F77] group-hover:text-[#C9A23F] transition-colors duration-300">
-                        {item.icon}
-                      </div>
 
-                      <h3 className="text-lg font-semibold text-gray-800">
-                        {item.title}
-                      </h3>
+  <motion.div
+    animate={
+      typeof window !== "undefined" && window.innerWidth >= 768
+        ? { y: [0, -10, 0] }
+        : {}
+    }
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: index * 0.3,
+    }}
+    whileHover={{ y: 0 }}
+  >
 
-                      <p className="mt-3 text-[#6B7280] text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </motion.div>
+    <div className="text-2xl mb-4 text-[#5B6F77] group-hover:text-[#C9A23F] transition-colors duration-300">
+      {item.icon}
+    </div>
 
-                    {/* Gold ambient glow */}
+    <h3 className="text-lg font-semibold text-gray-800">
+      {item.title}
+    </h3>
+
+    <p className="mt-3 text-[#6B7280] text-sm leading-relaxed">
+      {item.desc}
+    </p>
+
+  </motion.div>
+
                     <span className="absolute -top-8 -right-8 w-28 h-28 bg-[#C9A23F]/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></span>
 
                   </div>
 
                   {/* BACK SIDE */}
-                  <div className="absolute inset-0 rotate-y-180 backface-hidden bg-gradient-to-br from-teal-700 to-[#0F4C5C] text-white rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] flex items-center">
+                  <div className="absolute inset-0 rotate-y-180 backface-hidden bg-gradient-to-br from-teal-700 to-[#0F4C5C] text-white rounded-2xl p-5 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] flex items-center">
 
-                    <p className="text-sm leading-relaxed">
+                    <p className="text-xs md:text-sm leading-relaxed">
                       {item.back}
                     </p>
 

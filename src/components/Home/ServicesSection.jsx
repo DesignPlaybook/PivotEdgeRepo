@@ -56,9 +56,9 @@ const textAnim = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-20 bg-[#F8F7F4] relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-[#F8F7F4] relative overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-5 md:px-6">
 
         {/* Heading */}
         <motion.h2
@@ -66,7 +66,7 @@ const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
           viewport={{ once: false }}
-          className="text-3xl md:text-4xl font-semibold text-[#0F4C5C] text-center mb-12"
+          className="text-2xl md:text-4xl font-semibold text-[#0F4C5C] text-center mb-10 md:mb-12"
         >
           Our Services
         </motion.h2>
@@ -77,7 +77,7 @@ const ServicesSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-14"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-14"
         >
           {services.map((service, index) => (
             <motion.div
@@ -85,7 +85,7 @@ const ServicesSection = () => {
               variants={cardAnim}
               className="
               group relative
-              rounded-3xl p-8
+              rounded-3xl p-6 md:p-8
               bg-white/80 backdrop-blur-xl
               border-2 border-[#EFE6CF]
               shadow-[0_30px_70px_-20px_rgba(0,0,0,0.25)]
@@ -123,7 +123,7 @@ const ServicesSection = () => {
               {/* Image */}
               <motion.div
                 variants={textAnim}
-                className="relative z-10 overflow-hidden rounded-2xl mb-7"
+                className="relative z-10 overflow-hidden rounded-2xl mb-5 md:mb-7"
               >
 
                 <motion.div
@@ -140,13 +140,12 @@ const ServicesSection = () => {
                     src={service.icon}
                     alt={service.title}
                     className="
-                    h-52 w-full object-cover
+                    h-40 md:h-52 w-full object-cover
                     transition-transform duration-700 ease-out
                     group-hover:scale-110 group-hover:rotate-[0.8deg]
                     "
                   />
 
-                  {/* image overlay for richness */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-40" />
                 </motion.div>
 
@@ -157,38 +156,36 @@ const ServicesSection = () => {
 
                 <motion.h3
                   variants={textAnim}
-                  className="text-xl font-semibold text-gray-800 mb-3"
+                  className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3"
                 >
                   {service.title}
                 </motion.h3>
 
                 <motion.p
                   variants={textAnim}
-                  className="text-[#6B7280] leading-relaxed"
+                  className="text-sm md:text-base text-[#6B7280] leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
 
-                {/* Animated Accent Line */}
                 <motion.div
                   variants={textAnim}
                   className="
-                  mt-7
+                  mt-5 md:mt-7
                   h-[2px]
-                  w-16
+                  w-14 md:w-16
                   bg-[#C9A23F]
                   transition-all duration-500
-                  group-hover:w-32
+                  group-hover:w-28 md:group-hover:w-32
                   "
                 />
 
               </div>
 
-              {/* Decorative glow orb */}
               <span
                 className="
                 absolute -top-8 -right-8
-                h-28 w-28
+                h-24 w-24 md:h-28 md:w-28
                 rounded-full
                 bg-[#C9A23F]/20
                 blur-3xl
