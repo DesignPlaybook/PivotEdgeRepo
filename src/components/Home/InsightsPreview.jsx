@@ -19,21 +19,21 @@ const insights = [
   },
 ];
 
-/* Animations */
+/* Entry Animation */
 const container = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.22 },
+    transition: { staggerChildren: 0.18 },
   },
 };
 
-const cardPop = {
-  hidden: { opacity: 0, y: 45, scale: 0.95 },
+const cardAnim = {
+  hidden: { opacity: 0, y: 35, scale: 0.96 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
 };
 
@@ -42,13 +42,13 @@ const headingAnim = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.6 },
   },
 };
 
 const InsightsSection = () => {
   return (
-    <section className="py-10 bg-brand-offwhite">
+    <section className="py-16 bg-brand-offwhite">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -62,6 +62,7 @@ const InsightsSection = () => {
           <h2 className="text-3xl md:text-4xl font-semibold text-brand-teal">
             Insights & Perspectives
           </h2>
+
           <p className="mt-4 text-brand-slate">
             Our thinking on leadership, organizations, and the future of work.
           </p>
@@ -73,32 +74,56 @@ const InsightsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false }}
-          className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-10"
         >
           {insights.map((item, index) => (
             <motion.div
               key={index}
-              variants={cardPop}
+              variants={cardAnim}
+              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ duration: 0.35 }}
               className="
-                group bg-white rounded-2xl p-8
+                group relative
+                rounded-2xl p-8
+                bg-brand-ivory
                 border border-black/5
-                shadow-[0_12px_40px_rgba(0,0,0,0.14)]
+                shadow-[0_18px_55px_rgba(0,0,0,0.12)]
                 transition-all duration-500
-                hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+                hover:shadow-[0_28px_75px_rgba(0,0,0,0.18)]
+                overflow-hidden
               "
             >
-              {/* Floating wrapper */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.25,
-                }}
-                whileHover={{ y: 0 }}
-              >
-                <h3 className="text-lg font-semibold text-brand-charcoal mb-4">
+
+              {/* Gold accent line */}
+              <span
+                className="
+                  absolute top-0 left-0 w-full h-[3px]
+                  bg-gradient-to-r
+                  from-brand-gold
+                  via-brand-teal
+                  to-brand-gold
+                  opacity-80
+                "
+              />
+
+              {/* Soft glow background */}
+              <span
+                className="
+                  absolute -top-16 -right-16
+                  w-40 h-40
+                  bg-brand-gold/20
+                  blur-3xl
+                  rounded-full
+                  opacity-0
+                  group-hover:opacity-60
+                  transition duration-500
+                "
+              />
+
+              {/* Content */}
+              <div className="relative z-10">
+
+                <h3 className="text-lg font-semibold text-brand-charcoal mb-4 leading-snug">
                   {item.title}
                 </h3>
 
@@ -109,15 +134,20 @@ const InsightsSection = () => {
                 <Link
                   to="/insights"
                   className="
-                    inline-block font-medium text-brand-teal
-                    border-b border-brand-teal
-                    hover:text-brand-gold hover:border-brand-gold
-                    transition-colors
+                    inline-flex items-center gap-2
+                    text-brand-teal font-medium
+                    transition-all duration-300
+                    group-hover:text-teal-950
                   "
                 >
-                  Read more →
+                  Read more
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
                 </Link>
-              </motion.div>
+
+              </div>
+
             </motion.div>
           ))}
         </motion.div>

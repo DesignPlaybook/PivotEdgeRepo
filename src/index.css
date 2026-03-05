@@ -20,8 +20,6 @@
     transform: translateY(0);
   }
 }
-/* Custom horizontal scrollbar – clean single line */
-
 .domains-scroll::-webkit-scrollbar {
   height: 4px;
 }
@@ -31,12 +29,40 @@
 }
 
 .domains-scroll::-webkit-scrollbar-thumb {
-  background: #000; /* black line */
-  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(180,140,40,0.6),
+    rgba(20,120,120,0.6)
+  );
+  border-radius: 20px;
 }
 
-/* Firefox */
-.domains-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #000 transparent;
+.domains-scroll::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(
+  120deg,
+  #011519 0%,
+  #09728a 35%,
+  #083c48 100%
+);
+}
+/* 3D card flip support */
+
+.perspective {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.group:hover .group-hover\:rotate-y-180 {
+  transform: rotateY(180deg);
 }

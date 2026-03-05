@@ -29,7 +29,6 @@ const domains = [
   },
 ];
 
-/* Entry animation */
 const container = {
   hidden: {},
   show: {
@@ -49,8 +48,8 @@ const cardAnim = {
 
 const DomainsSection = () => {
   return (
-    <section className="py-8 bg-brand-offwhite">
-      <div className="max-w-full mx-auto px-6">
+    <section className="py-8 md:py-12 bg-brand-offwhite">
+      <div className="max-w-full mx-auto px-4 md:px-6">
 
         {/* Heading */}
         <motion.h2
@@ -58,7 +57,7 @@ const DomainsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: false }}
-          className="text-3xl md:text-4xl font-semibold text-brand-teal text-center mb-10"
+          className="text-2xl md:text-4xl font-semibold text-brand-teal text-center mb-8 md:mb-10"
         >
           Industries We Serve
         </motion.h2>
@@ -71,60 +70,110 @@ const DomainsSection = () => {
           viewport={{ once: false }}
           className="
             domains-scroll
-            flex gap-6
-            pt-6 pb-12
+            flex gap-4 md:gap-6
+            pt-4 md:pt-6 pb-10 md:pb-12
             overflow-x-auto overflow-y-visible
+            scroll-smooth
           "
         >
           {domains.map((domain, index) => (
-           <motion.div
-  key={index}
-  variants={cardAnim}
-  className="
-    relative flex-shrink-0
-    w-[360px] h-[260px] md:w-[320px] md:h-[280px]
-    rounded-2xl overflow-hidden
-    bg-black
-    shadow-[0_14px_45px_rgba(0,0,0,0.22)]
-  "
->
-  {/* FLOATING WRAPPER (same as Services page) */}
-  <motion.div
-    animate={{ y: [0, -12, 0] }}
-    transition={{
-      duration: 5,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay: index * 0.3,
-    }}
-    whileHover={{ y: 0 }}   // pause floating on hover
-    className="h-full w-full"
-  >
-    {/* Image */}
-    <img
-      src={domain.image}
-      alt={domain.title}
-      className="
-        absolute inset-0 w-full h-full object-cover
-        transition-transform duration-700 ease-out
-        hover:scale-105
-      "
-    />
+            <motion.div
+              key={index}
+              variants={cardAnim}
+              className="
+                group relative flex-shrink-0
+                w-[85vw] sm:w-[300px] md:w-[320px] lg:w-[360px]
+                h-[220px] sm:h-[240px] md:h-[260px] lg:h-[280px]
+                rounded-2xl overflow-hidden
+                bg-black
+                shadow-[0_14px_45px_rgba(0,0,0,0.22)]
+                transition-all duration-500
+                hover:-translate-y-2
+                hover:shadow-[0_30px_70px_rgba(0,0,0,0.35)]
+              "
+            >
 
-    {/* Gradient */}
-    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent" />
+              {/* Floating wrapper */}
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.3,
+                }}
+                whileHover={{ y: 0 }}
+                className="h-full w-full"
+              >
 
-    {/* Text */}
-    <div className="absolute bottom-0 left-0 p-5">
-      <h3 className="text-lg font-semibold text-white">
-        {domain.title}
-      </h3>
-      <p className="mt-1 text-sm text-white/85">
-        {domain.description}
-      </p>
-    </div>
-  </motion.div>
-</motion.div>
+                {/* Image */}
+                <img
+                  src={domain.image}
+                  alt={domain.title}
+                  className="
+                    absolute inset-0 w-full h-full object-cover
+                    transition-transform duration-700 ease-out
+                    group-hover:scale-110
+                  "
+                />
+
+              </motion.div>
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+              {/* Glass effect */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-white/5 backdrop-blur-[2px]
+                  opacity-0 group-hover:opacity-100
+                  transition duration-500
+                "
+              />
+
+              {/* Shimmer light */}
+              <div
+                className="
+                  absolute inset-0 overflow-hidden
+                  before:absolute before:top-0 before:left-[-120%]
+                  before:h-full before:w-[120%]
+                  before:bg-gradient-to-r
+                  before:from-transparent
+                  before:via-white/40
+                  before:to-transparent
+                  before:skew-x-[-20deg]
+                  group-hover:before:left-[120%]
+                  before:transition-all before:duration-1000
+                "
+              />
+
+              {/* Text */}
+              <div className="absolute bottom-0 left-0 p-4 md:p-6 z-10">
+                <h3 className="text-lg md:text-xl font-semibold text-white tracking-wide">
+                  {domain.title}
+                </h3>
+
+                <p className="mt-1 text-xs md:text-sm text-white/85">
+                  {domain.description}
+                </p>
+              </div>
+
+              {/* Glow orb */}
+              <span
+                className="
+                  absolute -top-6 -right-6
+                  h-24 w-24
+                  rounded-full
+                  bg-brand-gold/30
+                  blur-3xl
+                  opacity-0
+                  group-hover:opacity-100
+                  transition duration-700
+                "
+              />
+
+            </motion.div>
           ))}
         </motion.div>
 
@@ -134,7 +183,7 @@ const DomainsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: false }}
-          className="mt-10 text-center"
+          className="mt-6 md:mt-10 text-center"
         >
           <Link
             to="/domains"
@@ -143,6 +192,7 @@ const DomainsSection = () => {
               border-b border-brand-teal
               hover:text-brand-gold hover:border-brand-gold
               transition-colors
+              text-sm md:text-base
             "
           >
             View all domains →

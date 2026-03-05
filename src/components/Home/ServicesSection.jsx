@@ -23,23 +23,25 @@ const services = [
   },
 ];
 
-/* Animation variants */
 const container = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.25,
+      staggerChildren: 0.3,
     },
   },
 };
 
 const cardAnim = {
-  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  hidden: { opacity: 0, y: 70, scale: 0.94 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: {
+      duration: 1,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -48,22 +50,23 @@ const textAnim = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.7 },
   },
 };
 
 const ServicesSection = () => {
   return (
-    <section className="py-28 bg-brand-offwhite relative overflow-hidden">
+    <section className="py-20 bg-[#F8F7F4] relative overflow-hidden">
+
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.9 }}
           viewport={{ once: false }}
-          className="text-3xl md:text-4xl font-semibold text-brand-teal mb-16 text-center"
+          className="text-3xl md:text-4xl font-semibold text-[#0F4C5C] text-center mb-12"
         >
           Our Services
         </motion.h2>
@@ -80,80 +83,125 @@ const ServicesSection = () => {
             <motion.div
               key={index}
               variants={cardAnim}
-              className="group relative rounded-3xl p-8
-                bg-white/80 backdrop-blur-lg
-                border border-white/50
-                shadow-[0_25px_60px_-25px_rgba(0,0,0,0.2)]
-                transition-all duration-500 ease-out
-                hover:-translate-y-2 hover:shadow-[0_45px_90px_-30px_rgba(0,0,0,0.35)]"
+              className="
+              group relative
+              rounded-3xl p-8
+              bg-white/80 backdrop-blur-xl
+              border-2 border-[#EFE6CF]
+              shadow-[0_30px_70px_-20px_rgba(0,0,0,0.25)]
+              transition-all duration-500 ease-out
+              hover:-translate-y-4
+              hover:border-[#0F4C5C]
+              hover:shadow-[0_0_0_3px_rgba(15,76,92,0.15),0_45px_120px_-20px_rgba(0,0,0,0.35)]
+              "
             >
-              {/* Default glow */}
-              <div className="absolute inset-0 rounded-3xl
-                bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-teal/10" />
+
+              {/* Gradient background */}
+              <div
+                className="
+                absolute inset-0 rounded-3xl
+                bg-gradient-to-br
+                from-[#C9A23F]/10
+                via-transparent
+                to-[#0F4C5C]/10
+                "
+              />
 
               {/* Hover glow */}
-              <div className="absolute inset-0 rounded-3xl opacity-0
-                group-hover:opacity-100 transition duration-500
-                bg-gradient-to-br from-brand-gold/25 via-transparent to-brand-teal/25" />
+              <div
+                className="
+                absolute inset-0 rounded-3xl opacity-0
+                group-hover:opacity-100
+                transition duration-500
+                bg-gradient-to-br
+                from-[#C9A23F]/25
+                via-transparent
+                to-[#0F4C5C]/25
+                "
+              />
 
               {/* Image */}
-{/* Image */}
-<motion.div
-  variants={textAnim}
-  className="relative z-10 overflow-hidden rounded-2xl mb-7"
->
-  {/* Floating wrapper */}
-  <motion.div
-    animate={{ y: [0, -10, 0] }}
-    transition={{
-      duration: 5,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-    whileHover={{
-      y: 0, // pause floating on hover
-    }}
-  >
-    <img
-      src={service.icon}
-      alt={service.title}
-      className="h-48 w-full object-cover
-        transition-transform duration-700 ease-out
-        group-hover:scale-110 group-hover:rotate-[0.5deg]"
-    />
-  </motion.div>
-</motion.div>
+              <motion.div
+                variants={textAnim}
+                className="relative z-10 overflow-hidden rounded-2xl mb-7"
+              >
+
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.4,
+                  }}
+                  whileHover={{ y: 0 }}
+                >
+                  <img
+                    src={service.icon}
+                    alt={service.title}
+                    className="
+                    h-52 w-full object-cover
+                    transition-transform duration-700 ease-out
+                    group-hover:scale-110 group-hover:rotate-[0.8deg]
+                    "
+                  />
+
+                  {/* image overlay for richness */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-40" />
+                </motion.div>
+
+              </motion.div>
+
               {/* Content */}
               <div className="relative z-10">
+
                 <motion.h3
                   variants={textAnim}
-                  className="text-xl font-semibold text-brand-charcoal mb-3"
+                  className="text-xl font-semibold text-gray-800 mb-3"
                 >
                   {service.title}
                 </motion.h3>
 
                 <motion.p
                   variants={textAnim}
-                  className="text-brand-slate leading-relaxed"
+                  className="text-[#6B7280] leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
 
-                {/* Accent line */}
+                {/* Animated Accent Line */}
                 <motion.div
                   variants={textAnim}
-                  className="mt-7 h-[2px] w-14 bg-brand-gold transition-all duration-500 group-hover:w-28"
+                  className="
+                  mt-7
+                  h-[2px]
+                  w-16
+                  bg-[#C9A23F]
+                  transition-all duration-500
+                  group-hover:w-32
+                  "
                 />
+
               </div>
 
-              {/* Decorative orb */}
-              <span className="absolute -top-6 -right-6 h-24 w-24 rounded-full
-                bg-brand-gold/20 blur-2xl
+              {/* Decorative glow orb */}
+              <span
+                className="
+                absolute -top-8 -right-8
+                h-28 w-28
+                rounded-full
+                bg-[#C9A23F]/20
+                blur-3xl
                 transition-all duration-700
-                group-hover:bg-brand-gold/40 group-hover:scale-110" />
+                group-hover:bg-[#C9A23F]/40
+                group-hover:scale-125
+                "
+              />
+
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </section>
   );
