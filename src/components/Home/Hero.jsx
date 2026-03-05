@@ -36,10 +36,10 @@ const Hero = () => {
         />
       ))}
 
-      {/* Dark Overlay */}
+    
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Soft Spotlight behind text */}
+     
       <div className="absolute inset-0 flex items-center justify-center md:justify-start">
         <div className="w-[600px] h-[600px] bg-brand-gold/20 blur-[140px] rounded-full ml-[-120px]" />
       </div>
