@@ -4,6 +4,7 @@ import ServicesSection from './ServicesSection'
 import DomainsSection from './DomainsSection'
 import WhyChooseUs from './WhyChooseUs'
 import InsightsPreview from './InsightsPreview'
+import Introhighlight from './Introhighlight'
 
 
 function Home() {
@@ -12,6 +13,7 @@ function Home() {
        
        
        <Hero/>
+       <Introhighlight/>
        <ServicesSection/>
        <DomainsSection/>
        <WhyChooseUs/>
