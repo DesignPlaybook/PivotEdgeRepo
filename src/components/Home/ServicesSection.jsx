@@ -56,7 +56,7 @@ const textAnim = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-14 md:py-20 bg-[#F8F7F4] relative overflow-hidden">
+    <section className="py-5 md:py-20 bg-[#F8F7F4] relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-5 md:px-6">
 
