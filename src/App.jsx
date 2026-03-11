@@ -5,7 +5,7 @@ import About from "./components/About/About"
 import Services from "./components/Servicesection/Services"
 import Domain from "./components/Domain/Domain"
 import Insights from "./components/Insights/Insights"
-import Contact from "./components/Conatct.jsx/Contact"
+import Contact from "./components/Conatct.jsx/ContactMap"
 import Footer from "./components/Footer"
 
 
