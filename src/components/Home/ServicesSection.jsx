@@ -1,4 +1,3 @@
-// ServicesSection.jsx
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -6,20 +5,26 @@ const services = [
   {
     title: "Executive Search",
     description:
-      "We help companies identify and recruit top leadership talent worldwide.",
-    icon: "https://static.vecteezy.com/system/resources/previews/024/162/391/large_2x/businessman-using-a-magnifying-glass-to-search-for-business-risks-financial-risk-management-concept-business-investment-feasibility-assessment-fault-protection-protection-of-business-interests-free-photo.jpg",
+      "Retained search for Board, CEO, and senior functional leadership roles where leadership decisions shape enterprise performance.",
+    icon: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200",
   },
   {
-    title: "Leadership Consulting",
+    title: "Boards & Governance",
     description:
-      "Our experts guide organizations in leadership development and succession planning.",
-    icon: "https://st2.depositphotos.com/3591429/7167/i/950/depositphotos_71678161-stock-photo-diversity-of-business-people-leadership.jpg",
+      "Advisory support for Board composition, Director appointments, and governance succession planning.",
+    icon: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=1200",
   },
   {
-    title: "Diversity & Inclusion",
+    title: "CEO & Enterprise Leadership",
     description:
-      "Promoting inclusive practices that strengthen organizational culture.",
-    icon: "https://diversitydashboard.co.uk/_resx/imageresource/ce105a38af647d62966c694de2ba513d282203e9-1431-1795-0-0-0",
+      "Identification and evaluation of enterprise leaders capable of aligning strategy, governance, and operational execution.",
+    icon: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200",
+  },
+  {
+    title: "Artificial Intelligence Leadership",
+    description:
+      "Search for AI and digital leaders who can integrate intelligent technologies into enterprise strategy.",
+    icon: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200",
   },
 ];
 
@@ -27,19 +32,19 @@ const container = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.25,
     },
   },
 };
 
 const cardAnim = {
-  hidden: { opacity: 0, y: 70, scale: 0.94 },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 1,
+      duration: 0.9,
       ease: "easeOut",
     },
   },
@@ -56,28 +61,34 @@ const textAnim = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-5 md:py-20 bg-[#F8F7F4] relative overflow-hidden">
+    <section id="services" className="py-5 bg-[#F8F7F4] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
 
-      <div className="max-w-7xl mx-auto px-5 md:px-6">
-
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 35 }}
+        {/* Section Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          viewport={{ once: false }}
-          className="text-2xl md:text-4xl font-semibold text-[#0F4C5C] text-center mb-10 md:mb-12"
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
         >
-          Our Services
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#0F4C5C]">
+            What We Do
+          </h2>
+
+          <p className="mt-5 max-w-2xl mx-auto text-gray-600 leading-relaxed">
+            We partner with Boards and senior executives to secure leadership
+            that aligns strategy, governance, and long-term enterprise performance.
+          </p>
+        </motion.div>
 
         {/* Cards */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-14"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
         >
           {services.map((service, index) => (
             <motion.div
@@ -85,47 +96,34 @@ const ServicesSection = () => {
               variants={cardAnim}
               className="
               group relative
-              rounded-3xl p-6 md:p-8
-              bg-white/80 backdrop-blur-xl
-              border-2 border-[#EFE6CF]
-              shadow-[0_30px_70px_-20px_rgba(0,0,0,0.25)]
-              transition-all duration-500 ease-out
-              hover:-translate-y-4
-              hover:border-[#0F4C5C]
-              hover:shadow-[0_0_0_3px_rgba(15,76,92,0.15),0_45px_120px_-20px_rgba(0,0,0,0.35)]
+              rounded-2xl
+              bg-white
+              overflow-hidden
+              shadow-lg
+              hover:-translate-y-3
+              transition-all duration-500
               "
             >
 
-              {/* Gradient background */}
+              {/* Gradient glow */}
               <div
                 className="
-                absolute inset-0 rounded-3xl
+                absolute inset-0
                 bg-gradient-to-br
                 from-[#C9A23F]/10
                 via-transparent
                 to-[#0F4C5C]/10
-                "
-              />
-
-              {/* Hover glow */}
-              <div
-                className="
-                absolute inset-0 rounded-3xl opacity-0
+                opacity-0
                 group-hover:opacity-100
                 transition duration-500
-                bg-gradient-to-br
-                from-[#C9A23F]/25
-                via-transparent
-                to-[#0F4C5C]/25
                 "
               />
 
               {/* Image */}
               <motion.div
                 variants={textAnim}
-                className="relative z-10 overflow-hidden rounded-2xl mb-5 md:mb-7"
+                className="h-44 overflow-hidden relative"
               >
-
                 <motion.div
                   animate={{ y: [0, -12, 0] }}
                   transition={{
@@ -140,60 +138,40 @@ const ServicesSection = () => {
                     src={service.icon}
                     alt={service.title}
                     className="
-                    h-40 md:h-52 w-full object-cover
-                    transition-transform duration-700 ease-out
+                    w-full h-44 object-cover
+                    transition-transform duration-700
                     group-hover:scale-110 group-hover:rotate-[0.8deg]
                     "
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-40" />
                 </motion.div>
-
               </motion.div>
 
               {/* Content */}
-              <div className="relative z-10">
+              <div className="p-6 relative z-10">
 
                 <motion.h3
                   variants={textAnim}
-                  className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3"
+                  className="text-lg font-semibold text-[#0F4C5C] mb-3"
                 >
                   {service.title}
                 </motion.h3>
 
                 <motion.p
                   variants={textAnim}
-                  className="text-sm md:text-base text-[#6B7280] leading-relaxed"
+                  className="text-sm text-gray-600 leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
 
+                {/* Gold Accent */}
                 <motion.div
                   variants={textAnim}
-                  className="
-                  mt-5 md:mt-7
-                  h-[2px]
-                  w-14 md:w-16
-                  bg-[#C9A23F]
-                  transition-all duration-500
-                  group-hover:w-28 md:group-hover:w-32
-                  "
+                  className="mt-6 h-[2px] w-14 bg-[#C9A23F] group-hover:w-24 transition-all duration-500"
                 />
 
               </div>
-
-              <span
-                className="
-                absolute -top-8 -right-8
-                h-24 w-24 md:h-28 md:w-28
-                rounded-full
-                bg-[#C9A23F]/20
-                blur-3xl
-                transition-all duration-700
-                group-hover:bg-[#C9A23F]/40
-                group-hover:scale-125
-                "
-              />
 
             </motion.div>
           ))}

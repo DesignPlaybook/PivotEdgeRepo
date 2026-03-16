@@ -3,19 +3,19 @@ import { motion } from "framer-motion";
 
 const insights = [
   {
-    title: "The Future of Leadership in a Digital World",
+    title: "Navigating Leadership in the Age of AI",
     excerpt:
-      "How organizations can prepare leaders for complexity, change, and digital transformation.",
+      "Artificial intelligence is reshaping enterprise strategy. Organizations must identify leaders who can integrate technology, governance, and human decision-making.",
   },
   {
-    title: "Why Executive Search Is Evolving",
+    title: "The Importance of Board Succession Planning",
     excerpt:
-      "Traditional hiring models are changing. Here’s what modern leadership search looks like.",
+      "Strong boards are built through thoughtful succession planning, diversity of perspectives, and leadership continuity aligned with long-term strategy.",
   },
   {
-    title: "Building Inclusive Leadership Teams",
+    title: "Building Future-Ready Leadership Teams",
     excerpt:
-      "Diversity-driven leadership is no longer optional — it’s a business imperative.",
+      "Organizations that invest in leadership development and succession pipelines are better positioned to adapt to global disruption and evolving markets.",
   },
 ];
 
@@ -48,7 +48,7 @@ const headingAnim = {
 
 const InsightsSection = () => {
   return (
-    <section className="py-16 bg-brand-offwhite">
+    <section className="bg-brand-offwhite py-2 ">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -59,12 +59,13 @@ const InsightsSection = () => {
           viewport={{ once: false }}
           className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-brand-teal">
+          <h2 className="text-3xl md:text-4xl font-semibold text-brand-teal pb-2.5">
             Insights & Perspectives
           </h2>
 
-          <p className="mt-4 text-brand-slate">
-            Our thinking on leadership, organizations, and the future of work.
+          <p className="mt-2 text-brand-slate">
+            Our perspectives on leadership, governance, and the evolving role
+            of executives in shaping sustainable enterprise performance.
           </p>
         </motion.div>
 
@@ -74,7 +75,7 @@ const InsightsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false }}
-          className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-10"
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10"
         >
           {insights.map((item, index) => (
             <motion.div
@@ -151,6 +152,9 @@ const InsightsSection = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Divider before footer */}
+        <div className="mt-20 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent"></div>
 
       </div>
     </section>

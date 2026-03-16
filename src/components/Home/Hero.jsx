@@ -83,8 +83,7 @@ const Hero = () => {
             tracking-[-0.02em]
             "
           >
-            Leadership that shapes the{" "}
-
+            Leadership That{" "}
             <span
               className="
               font-semibold
@@ -96,7 +95,7 @@ const Hero = () => {
               text-transparent
               "
             >
-              future
+              Defines Direction
             </span>
           </h1>
 
@@ -112,9 +111,21 @@ const Hero = () => {
             mx-auto md:mx-0
             "
           >
-            Trusted advisors to organizations seeking exceptional leadership
-            across industries and global markets.
+            PivotEdge Partners is a specialist executive search and leadership
+            advisory firm partnering with Boards and senior executives to
+            secure leadership that shapes strategy, governance, and long-term
+            enterprise performance.
           </p>
+
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-4 text-brand-gold font-medium tracking-widest text-sm uppercase"
+          >
+            Advantage Starts Here
+          </motion.p>
 
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -146,7 +157,7 @@ const Hero = () => {
               transition-all duration-300
               "
             >
-              Our Expertise
+              View Our Approach
             </button>
 
           </div>
@@ -156,7 +167,12 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2"
+        onClick={() =>
+          document.getElementById("leadership-section")?.scrollIntoView({
+            behavior: "smooth",
+          })
+        }
+        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
