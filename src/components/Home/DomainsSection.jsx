@@ -4,28 +4,35 @@ import { motion } from "framer-motion";
 const domains = [
   {
     title: "Technology",
-    description: "Innovative solutions & digital transformation.",
+    description:
+      "Leadership for software, AI, cloud, and digital transformation enterprises.",
     image: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg",
   },
   {
     title: "Healthcare",
-    description: "Building healthy futures and care excellence.",
-    image: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg",
+    description:
+      "Executive leadership for healthcare systems, biotech, and life sciences.",
+    image:
+      "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg",
   },
   {
     title: "Consumer & Retail",
-    description: "Retail insights & consumer trends.",
+    description:
+      "Leaders driving brand growth, retail innovation, and customer experience.",
     image: "https://images.pexels.com/photos/298864/pexels-photo-298864.jpeg",
   },
   {
     title: "Industrial & Manufacturing",
-    description: "Optimized production & advanced engineering.",
+    description:
+      "Executive talent for global manufacturing, engineering, and operations.",
     image: "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg",
   },
   {
     title: "Financial Services",
-    description: "Smart financial strategies & advisory.",
-    image: "https://tse3.mm.bing.net/th/id/OIP.LTSN-pEUE5mWBc3RLJ8VPQHaEo?pid=Api&P=0&h=180",
+    description:
+      "Strategic leadership across banking, fintech, insurance, and investment.",
+    image:
+      "https://tse3.mm.bing.net/th/id/OIP.LTSN-pEUE5mWBc3RLJ8VPQHaEo?pid=Api&P=0&h=180",
   },
 ];
 
@@ -48,19 +55,24 @@ const cardAnim = {
 
 const DomainsSection = () => {
   return (
-    <section className="py-8 md:py-12 bg-brand-offwhite">
+    <section className="py-5 md:py-3 bg-brand-offwhite">
       <div className="max-w-full mx-auto px-4 md:px-6">
 
         {/* Heading */}
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: false }}
-          className="text-2xl md:text-4xl font-semibold text-brand-teal text-center mb-8 md:mb-10"
+          className="text-center mb-8 md:mb-10"
         >
-          Industries We Serve
-        </motion.h2>
+          <h2 className="text-2xl md:text-4xl font-semibold text-brand-teal tracking-wide">
+            Industries We Serve
+          </h2>
+
+          {/* Gold divider */}
+          <div className="w-20 h-[2px] bg-brand-gold mx-auto mt-4"></div>
+        </motion.div>
 
         {/* Horizontal Scroll */}
         <motion.div
@@ -120,7 +132,7 @@ const DomainsSection = () => {
               </motion.div>
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
 
               {/* Glass effect */}
               <div
@@ -154,7 +166,7 @@ const DomainsSection = () => {
                   {domain.title}
                 </h3>
 
-                <p className="mt-1 text-xs md:text-sm text-white/85">
+                <p className="mt-1 text-xs md:text-sm text-white/90 leading-relaxed">
                   {domain.description}
                 </p>
               </div>
@@ -195,7 +207,7 @@ const DomainsSection = () => {
               text-sm md:text-base
             "
           >
-            View all domains →
+            Explore all industries →
           </Link>
         </motion.div>
 

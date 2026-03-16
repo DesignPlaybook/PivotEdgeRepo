@@ -4,27 +4,27 @@ import { FaGlobe, FaUserTie, FaChartLine, FaHandshake } from "react-icons/fa";
 const points = [
   {
     icon: <FaGlobe />,
-    title: "Global Perspective",
-    desc: "Deep understanding of leadership across geographies and markets.",
-    back: "Our global research and partnerships allow us to identify leadership trends across industries worldwide.",
+    title: "Global Leadership Network",
+    desc: "Access to a worldwide network of senior leaders and industry experts.",
+    back: "Our global research capabilities and relationships enable us to identify exceptional leaders across industries and regions.",
   },
   {
     icon: <FaUserTie />,
-    title: "Leadership Expertise",
-    desc: "Decades of experience advising senior leaders and boards.",
-    back: "We work closely with CEOs and leadership teams to build strong executive pipelines.",
+    title: "Board & CEO Advisory",
+    desc: "Trusted advisors to boards and CEOs on leadership strategy.",
+    back: "We partner with boards and executive teams to strengthen governance, leadership succession, and executive effectiveness.",
   },
   {
     icon: <FaChartLine />,
-    title: "Tailored Solutions",
-    desc: "Every engagement is customized to your organization’s needs.",
-    back: "Our approach ensures every strategy aligns with the company's culture and future vision.",
+    title: "Leadership Assessment",
+    desc: "Data-driven evaluation of leadership potential and capability.",
+    back: "Our structured assessment approach ensures organizations appoint leaders who align with strategy, culture, and long-term performance.",
   },
   {
     icon: <FaHandshake />,
-    title: "Trusted Partnerships",
-    desc: "Long-term relationships built on trust, insight, and results.",
-    back: "Our clients rely on us for long-term advisory partnerships that deliver measurable outcomes.",
+    title: "Long-Term Partnerships",
+    desc: "Building enduring relationships with organizations worldwide.",
+    back: "We support our clients beyond search engagements through long-term advisory partnerships focused on leadership success.",
   },
 ];
 
@@ -59,7 +59,7 @@ const leftTextAnim = {
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 bg-[#F8F7F4]">
+    <section className="py-24 md:py-28 bg-[#F8F7F4]">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -72,41 +72,47 @@ const WhyChooseUs = () => {
             viewport={{ once: false }}
             className="space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
-              <span className="text-[#0F4C5C]">
-                Why Organizations
-              </span>{" "}
-              <span className="text-gray-800">
-                Choose Us
-              </span>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-wide">
+              <span className="text-[#0F4C5C]">Why Organizations</span>{" "}
+              <span className="text-gray-800">Choose Us</span>
             </h2>
 
-            <div className="w-16 h-1 bg-[#C9A23F] rounded-full"></div>
+            <div className="w-20 h-[2px] bg-[#C9A23F] rounded-full"></div>
 
-            <p className="text-[#6B7280] max-w-xl leading-relaxed text-[15px] md:text-base">
-              We partner with organizations to solve complex leadership
-              challenges through deep insight, proven experience, and a global
-              network of professionals who understand evolving markets.
+            <p className="text-[#6B7280] max-w-xl leading-relaxed text-[15px] md:text-base tracking-[0.2px]">
+              We partner with boards and senior executives to address complex
+              leadership challenges, combining deep industry insight with a
+              global network to identify leaders who drive long-term enterprise
+              performance.
             </p>
 
-            <div className="grid grid-cols-3 gap-6 pt-4 max-w-md">
+            {/* STATS */}
+            <div className="grid grid-cols-3 gap-6 pt-6 max-w-md">
 
               <div>
-                <h3 className="text-2xl font-semibold text-[#0F4C5C]">20+</h3>
-                <p className="text-xs text-[#6B7280] mt-1">Years Experience</p>
+                <h3 className="text-3xl font-semibold text-[#0F4C5C]">20+</h3>
+                <p className="text-xs text-[#6B7280] mt-1">
+                  Years Experience
+                </p>
               </div>
 
               <div>
-                <h3 className="text-2xl font-semibold text-[#0F4C5C]">150+</h3>
-                <p className="text-xs text-[#6B7280] mt-1">Global Clients</p>
+                <h3 className="text-3xl font-semibold text-[#0F4C5C]">150+</h3>
+                <p className="text-xs text-[#6B7280] mt-1">
+                  Global Clients
+                </p>
               </div>
 
               <div>
-                <h3 className="text-2xl font-semibold text-[#0F4C5C]">40+</h3>
-                <p className="text-xs text-[#6B7280] mt-1">Industries Served</p>
+                <h3 className="text-3xl font-semibold text-[#0F4C5C]">40+</h3>
+                <p className="text-xs text-[#6B7280] mt-1">
+                  Industries Served
+                </p>
               </div>
 
             </div>
+
           </motion.div>
 
           {/* RIGHT CARDS */}
@@ -121,53 +127,59 @@ const WhyChooseUs = () => {
               <motion.div
                 key={index}
                 variants={cardPop}
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.4
+                }}
                 className="group perspective"
               >
 
-                {/* CARD WRAPPER */}
                 <div className="relative w-full h-44 md:h-56 transition-transform duration-700 transform-style preserve-3d group-hover:rotate-y-180 hover:-translate-y-2">
 
-                  {/* FRONT SIDE */}
+                  {/* FRONT */}
                   <div className="absolute inset-0 backface-hidden bg-[#F3F3F0] rounded-2xl p-5 md:p-8 border-4 border-[#EFE6CF] shadow-[0_18px_45px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:border-[#0F4C5C] group-hover:shadow-[0_0_0_3px_rgba(15,76,92,0.15)]">
 
+                    <motion.div
+                      animate={
+                        typeof window !== "undefined" && window.innerWidth >= 768
+                          ? { y: [0, -10, 0] }
+                          : {}
+                      }
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.3,
+                      }}
+                      whileHover={{ y: 0 }}
+                    >
 
-  <motion.div
-    animate={
-      typeof window !== "undefined" && window.innerWidth >= 768
-        ? { y: [0, -10, 0] }
-        : {}
-    }
-    transition={{
-      duration: 5,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay: index * 0.3,
-    }}
-    whileHover={{ y: 0 }}
-  >
+                      <div className="text-2xl mb-4 text-[#5B6F77] group-hover:text-[#C9A23F] transition-colors duration-300">
+                        {item.icon}
+                      </div>
 
-    <div className="text-2xl mb-4 text-[#5B6F77] group-hover:text-[#C9A23F] transition-colors duration-300">
-      {item.icon}
-    </div>
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        {item.title}
+                      </h3>
 
-    <h3 className="text-lg font-semibold text-gray-800">
-      {item.title}
-    </h3>
+                      <p className="mt-3 text-[#6B7280] text-[14px] leading-relaxed">
+                        {item.desc}
+                      </p>
 
-    <p className="mt-3 text-[#6B7280] text-sm leading-relaxed">
-      {item.desc}
-    </p>
+                    </motion.div>
 
-  </motion.div>
-
-                    <span className="absolute -top-8 -right-8 w-28 h-28 bg-[#C9A23F]/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></span>
+                    {/* PREMIUM GLOW */}
+                    <span className="absolute -top-10 -right-10 w-36 h-36 bg-[#C9A23F]/30 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></span>
 
                   </div>
 
-                  {/* BACK SIDE */}
+                  {/* BACK */}
                   <div className="absolute inset-0 rotate-y-180 backface-hidden bg-gradient-to-br from-teal-700 to-[#0F4C5C] text-white rounded-2xl p-5 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] flex items-center">
 
-                    <p className="text-xs md:text-sm leading-relaxed">
+                    <p className="text-xs md:text-sm leading-relaxed tracking-[0.2px]">
                       {item.back}
                     </p>
 
