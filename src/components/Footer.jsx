@@ -12,7 +12,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1f6a6d] text-gray-200 pt-10 pb-8">
+    <footer className="bg-[#0F4C5C] text-gray-200 pt-10 pb-8">
 
       {/* Top Divider */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-40 mb-8"></div>
