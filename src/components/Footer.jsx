@@ -9,19 +9,17 @@ import {
   FaTwitter,
   FaInstagram,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="bg-[#0F4C5C] text-gray-200 pt-10 pb-8">
-
       {/* Top Divider */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-40 mb-8"></div>
 
       <div className="max-w-7xl mx-auto px-5">
-
         {/* Grid Layout */}
         <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8">
-
           {/* Logo Section (Desktop Only) */}
           <div className="hidden lg:block max-w-xs">
             <div className="bg-white p-2 rounded-md inline-block mb-4">
@@ -43,7 +41,9 @@ const Footer = () => {
 
             <ul className="space-y-1 sm:space-y-2 text-[11px] sm:text-xs md:text-sm">
               <li className="hover:text-[#d4af37] cursor-pointer">About Us</li>
-              <li className="hover:text-[#d4af37] cursor-pointer">Leadership</li>
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                Leadership
+              </li>
               <li className="hover:text-[#d4af37] cursor-pointer">Careers</li>
               <li className="hover:text-[#d4af37] cursor-pointer">Insights</li>
               <li className="hover:text-[#d4af37] cursor-pointer">Contact</li>
@@ -79,7 +79,6 @@ const Footer = () => {
             </h4>
 
             <ul className="space-y-2 text-[11px] sm:text-xs md:text-sm">
-
               <li className="flex items-start gap-2 break-words">
                 <FaEnvelope className="text-[#d4af37] mt-[3px] min-w-[12px]" />
                 <span>info@company.com</span>
@@ -94,12 +93,10 @@ const Footer = () => {
                 <FaMapMarkerAlt className="text-[#d4af37] mt-[3px] min-w-[12px]" />
                 <span>Mumbai, India</span>
               </li>
-
             </ul>
 
             {/* Social Icons */}
             <div className="flex gap-2 mt-3">
-
               <a className="p-1.5 rounded-md bg-white/10 hover:bg-[#d4af37] hover:text-black transition cursor-pointer">
                 <FaLinkedin size={12} />
               </a>
@@ -111,31 +108,29 @@ const Footer = () => {
               <a className="p-1.5 rounded-md bg-white/10 hover:bg-[#d4af37] hover:text-black transition cursor-pointer">
                 <FaInstagram size={12} />
               </a>
-
             </div>
           </div>
-
         </div>
 
         {/* Bottom Section */}
         <div className="border-t border-white/10 mt-8 pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-[11px] md:text-sm">
-
           <p className="text-gray-300 text-center md:text-left">
-            © {new Date().getFullYear()} CompanyName. All rights reserved.
+            © {new Date().getFullYear()} PivotEdge. All rights reserved.
           </p>
 
           <div className="flex gap-4">
             <span className="hover:text-[#d4af37] cursor-pointer">
-              Privacy Policy
+              <Link to="/policies">Privacy Policy</Link>
             </span>
 
             <span className="hover:text-[#d4af37] cursor-pointer">
-              Terms & Conditions
+              <Link to="/terms">Terms & Conditions</Link>
+            </span>
+            <span className="hover:text-[#d4af37] cursor-pointer">
+              <Link to="/disclaimer">Disclaimer</Link>
             </span>
           </div>
-
         </div>
-
       </div>
     </footer>
   );
