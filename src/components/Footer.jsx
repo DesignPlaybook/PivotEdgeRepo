@@ -12,137 +12,131 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-gray-300  pb-10 overflow-hidden">
+    <footer className="bg-[#1f6a6d] text-gray-200 pt-10 pb-8">
 
-      {/* Background Glow */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#C9A23F]/10 blur-[180px] rounded-full"></div>
+      {/* Top Divider */}
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-40 mb-8"></div>
 
-      {/* Top Gold Divider */}
-      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-40 mb-14"></div>
+      <div className="max-w-7xl mx-auto px-5">
 
-      <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+        {/* Grid Layout */}
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8">
 
-        {/* Logo + About */}
-        <div>
-          <img
-            src={logo}
-            alt="Company Logo"
-            className="h-16 w-auto mb-5 brightness-125 contrast-125 transition duration-300 hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(201,162,63,0.6)]"
-          />
+          {/* Logo Section (Desktop Only) */}
+          <div className="hidden lg:block max-w-xs">
+            <div className="bg-white p-2 rounded-md inline-block mb-4">
+              <img src={logo} alt="Company Logo" className="h-12 w-auto" />
+            </div>
 
-          <p className="text-gray-400 text-sm leading-relaxed">
-            We partner with boards and senior executives to identify
-            transformational leaders who drive long-term enterprise
-            performance across industries and global markets.
-          </p>
-        </div>
+            <p className="text-sm leading-relaxed text-gray-300">
+              We partner with boards and senior executives to identify
+              transformational leaders who drive long-term enterprise
+              performance across industries and global markets.
+            </p>
+          </div>
 
-        {/* Company */}
-        <div>
-          <h4 className="text-white font-semibold mb-5 tracking-wide">Company</h4>
+          {/* Company */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-xs sm:text-sm md:text-base">
+              Company
+            </h4>
 
-          <ul className="space-y-3 text-sm text-gray-400">
+            <ul className="space-y-1 sm:space-y-2 text-[11px] sm:text-xs md:text-sm">
+              <li className="hover:text-[#d4af37] cursor-pointer">About Us</li>
+              <li className="hover:text-[#d4af37] cursor-pointer">Leadership</li>
+              <li className="hover:text-[#d4af37] cursor-pointer">Careers</li>
+              <li className="hover:text-[#d4af37] cursor-pointer">Insights</li>
+              <li className="hover:text-[#d4af37] cursor-pointer">Contact</li>
+            </ul>
+          </div>
 
-            {["About Us", "Leadership", "Careers", "Insights", "Contact"].map(
-              (item, index) => (
-                <li key={index} className="group cursor-pointer w-fit">
-                  <span className="relative transition hover:text-white">
-                    {item}
-                    <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#C9A23F] transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </li>
-              )
-            )}
+          {/* Services */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-xs sm:text-sm md:text-base">
+              Services
+            </h4>
 
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div>
-          <h4 className="text-white font-semibold mb-5 tracking-wide">Services</h4>
-
-          <ul className="space-y-3 text-sm text-gray-400">
-
-            {[
-              "Executive Search",
-              "Board Advisory",
-              "CEO & Leadership Advisory",
-              "Succession Planning",
-            ].map((item, index) => (
-              <li key={index} className="group cursor-pointer w-fit">
-                <span className="relative transition hover:text-white">
-                  {item}
-                  <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#C9A23F] transition-all duration-300 group-hover:w-full"></span>
-                </span>
+            <ul className="space-y-1 sm:space-y-2 text-[11px] sm:text-xs md:text-sm">
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                Executive Search
               </li>
-            ))}
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                Board Advisory
+              </li>
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                CEO & Leadership Advisory
+              </li>
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                Succession Planning
+              </li>
+            </ul>
+          </div>
 
-          </ul>
+          {/* Contact */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-xs sm:text-sm md:text-base">
+              Contact
+            </h4>
+
+            <ul className="space-y-2 text-[11px] sm:text-xs md:text-sm">
+
+              <li className="flex items-start gap-2 break-words">
+                <FaEnvelope className="text-[#d4af37] mt-[3px] min-w-[12px]" />
+                <span>info@company.com</span>
+              </li>
+
+              <li className="flex items-start gap-2 break-words">
+                <FaPhoneAlt className="text-[#d4af37] mt-[3px] min-w-[12px]" />
+                <span>+91 98765 43210</span>
+              </li>
+
+              <li className="flex items-start gap-2 break-words">
+                <FaMapMarkerAlt className="text-[#d4af37] mt-[3px] min-w-[12px]" />
+                <span>Mumbai, India</span>
+              </li>
+
+            </ul>
+
+            {/* Social Icons */}
+            <div className="flex gap-2 mt-3">
+
+              <a className="p-1.5 rounded-md bg-white/10 hover:bg-[#d4af37] hover:text-black transition cursor-pointer">
+                <FaLinkedin size={12} />
+              </a>
+
+              <a className="p-1.5 rounded-md bg-white/10 hover:bg-[#d4af37] hover:text-black transition cursor-pointer">
+                <FaTwitter size={12} />
+              </a>
+
+              <a className="p-1.5 rounded-md bg-white/10 hover:bg-[#d4af37] hover:text-black transition cursor-pointer">
+                <FaInstagram size={12} />
+              </a>
+
+            </div>
+          </div>
+
         </div>
 
-        {/* Contact */}
-        <div>
-          <h4 className="text-white font-semibold mb-5 tracking-wide">Contact</h4>
+        {/* Bottom Section */}
+        <div className="border-t border-white/10 mt-8 pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-[11px] md:text-sm">
 
-          <ul className="space-y-4 text-sm text-gray-400">
+          <p className="text-gray-300 text-center md:text-left">
+            © {new Date().getFullYear()} CompanyName. All rights reserved.
+          </p>
 
-            <li className="flex items-center gap-3">
-              <FaEnvelope className="text-[#C9A23F]" />
-              info@company.com
-            </li>
+          <div className="flex gap-4">
+            <span className="hover:text-[#d4af37] cursor-pointer">
+              Privacy Policy
+            </span>
 
-            <li className="flex items-center gap-3">
-              <FaPhoneAlt className="text-[#C9A23F]" />
-              +91 98765 43210
-            </li>
-
-            <li className="flex items-center gap-3">
-              <FaMapMarkerAlt className="text-[#C9A23F]" />
-              Mumbai, India
-            </li>
-
-          </ul>
-
-          {/* Social Icons */}
-          <div className="flex gap-4 mt-6">
-
-            <a className="p-2 rounded-full bg-white/5 hover:bg-[#C9A23F] hover:text-black transition duration-300 cursor-pointer">
-              <FaLinkedin />
-            </a>
-
-            <a className="p-2 rounded-full bg-white/5 hover:bg-[#C9A23F] hover:text-black transition duration-300 cursor-pointer">
-              <FaTwitter />
-            </a>
-
-            <a className="p-2 rounded-full bg-white/5 hover:bg-[#C9A23F] hover:text-black transition duration-300 cursor-pointer">
-              <FaInstagram />
-            </a>
-
+            <span className="hover:text-[#d4af37] cursor-pointer">
+              Terms & Conditions
+            </span>
           </div>
 
         </div>
 
       </div>
-
-      {/* Bottom */}
-      <div className="max-w-7xl mx-auto px-6 mt-14 border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-
-        <p className="text-gray-500 text-sm text-center md:text-left">
-          © {new Date().getFullYear()} CompanyName. All rights reserved.
-        </p>
-
-        <div className="flex gap-6 text-sm text-gray-400">
-          <span className="hover:text-white cursor-pointer transition">
-            Privacy Policy
-          </span>
-
-          <span className="hover:text-white cursor-pointer transition">
-            Terms & Conditions
-          </span>
-        </div>
-
-      </div>
-
     </footer>
   );
 };
