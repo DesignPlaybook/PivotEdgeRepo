@@ -21,10 +21,10 @@ const cardAnim = {
 
 function Introhighlight() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-10 bg-[#F4F1EA] relative overflow-hidden">
 
-      {/* subtle background effect */}
-      <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_20%_20%,#000_0%,transparent_60%)]"></div>
+      {/* subtle gold glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#C9A23F22,transparent_60%)]"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 text-center">
 
@@ -33,21 +33,22 @@ function Introhighlight() {
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: false }}
         >
 
-          <span className="text-sm tracking-widest uppercase text-brand-gold font-medium">
-            Our Approach
+          <span className="text-lg md:text-xl tracking-[0.25em] uppercase text-[#C9A23F] font-medium break-words">
+            Why Leadership Matters
           </span>
 
-          <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-6 text-brand-teal">
-            Advising Organizations on Leadership That Drives Performance
+          <h2 className="text-3xl md:text-5xl font-light mt-2 mb-2 text-[#0F4C5C] leading-tight">
+            Leadership Shapes Performance,
+            <br />
+            <span className="text-[#C9A23F] font-semibold">
+              Culture & Direction
+            </span>
           </h2>
 
-          <p className="text-gray-600 max-w-3xl mx-auto mb-14 leading-relaxed">
-            We partner with boards, CEOs, and senior executives to identify
-            transformational leaders, strengthen governance, and build
-            leadership teams capable of delivering long-term enterprise value.
+          <p className="text-[#5b6f77] max-w-3xl mx-auto mb-14 leading-[1.9] text-[15.5px] font-light">
+            Leadership is the single most influential factor in organisational performance. Strategy, culture, governance quality, and execution discipline are all shaped at the top. In complex and rapidly evolving markets, organisations require leaders who combine strategic judgement with operational clarity.
           </p>
 
         </motion.div>
@@ -57,104 +58,78 @@ function Introhighlight() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
 
           {/* Card 1 */}
           <motion.div
             variants={cardAnim}
-            whileHover={{ y: -10, scale: 1.02 }}
-            className="
-            group
-            p-8
-            border border-black/5
-            rounded-2xl
-            bg-white
-            shadow-sm
-            hover:shadow-xl
-            transition duration-500
-            relative
-            overflow-hidden
-            "
+            whileHover={{ y: -8 }}
+            className="group p-[1px] rounded-2xl bg-gradient-to-br from-[#C9A23F]/40 via-white/40 to-transparent transition duration-500"
           >
+            <div className="relative h-full bg-white/80 backdrop-blur-xl rounded-2xl p-8 border border-white/40 shadow-sm hover:shadow-xl transition duration-500 overflow-hidden">
 
-            <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-gold via-brand-teal to-brand-gold"></span>
+              <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#C9A23F] via-[#0F4C5C] to-[#C9A23F]"></span>
 
-            <h3 className="text-xl font-semibold mb-3 text-brand-charcoal">
-              Leadership Expertise
-            </h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#0F4C5C]">
+                Strategic Direction
+              </h3>
 
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Deep experience advising boards and executive teams on leadership
-              appointments, succession planning, and governance priorities.
-            </p>
+              <p className="text-[#5b6f77] text-[15px] leading-[1.8] font-light">
+                Leadership defines the strategic direction of an organisation, ensuring clarity in decision-making and alignment across functions.
+              </p>
 
+            </div>
           </motion.div>
 
           {/* Card 2 */}
           <motion.div
             variants={cardAnim}
-            whileHover={{ y: -10, scale: 1.02 }}
-            className="
-            group
-            p-8
-            border border-black/5
-            rounded-2xl
-            bg-white
-            shadow-sm
-            hover:shadow-xl
-            transition duration-500
-            relative
-            overflow-hidden
-            "
+            whileHover={{ y: -8 }}
+            className="group p-[1px] rounded-2xl bg-gradient-to-br from-[#C9A23F]/40 via-white/40 to-transparent transition duration-500"
           >
+            <div className="relative h-full bg-white/80 backdrop-blur-xl rounded-2xl p-8 border border-white/40 shadow-sm hover:shadow-xl transition duration-500 overflow-hidden">
 
-            <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-gold via-brand-teal to-brand-gold"></span>
+              <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#C9A23F] via-[#0F4C5C] to-[#C9A23F]"></span>
 
-            <h3 className="text-xl font-semibold mb-3 text-brand-charcoal">
-              Strategic Perspective
-            </h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#0F4C5C]">
+                Governance & Culture
+              </h3>
 
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Insight-driven advisory designed to align leadership decisions
-              with long-term business strategy and enterprise goals.
-            </p>
+              <p className="text-[#5b6f77] text-[15px] leading-[1.8] font-light">
+                Strong leadership strengthens governance frameworks and shapes organisational culture, influencing how teams operate and perform.
+              </p>
 
+            </div>
           </motion.div>
 
           {/* Card 3 */}
           <motion.div
             variants={cardAnim}
-            whileHover={{ y: -10, scale: 1.02 }}
-            className="
-            group
-            p-8
-            border border-black/5
-            rounded-2xl
-            bg-white
-            shadow-sm
-            hover:shadow-xl
-            transition duration-500
-            relative
-            overflow-hidden
-            "
+            whileHover={{ y: -8 }}
+            className="group p-[1px] rounded-2xl bg-gradient-to-br from-[#C9A23F]/40 via-white/40 to-transparent transition duration-500"
           >
+            <div className="relative h-full bg-white/80 backdrop-blur-xl rounded-2xl p-8 border border-white/40 shadow-sm hover:shadow-xl transition duration-500 overflow-hidden">
 
-            <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-gold via-brand-teal to-brand-gold"></span>
+              <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#C9A23F] via-[#0F4C5C] to-[#C9A23F]"></span>
 
-            <h3 className="text-xl font-semibold mb-3 text-brand-charcoal">
-              Long-Term Partnership
-            </h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#0F4C5C]">
+                Enterprise Impact
+              </h3>
 
-            <p className="text-gray-600 text-sm leading-relaxed">
-              We build trusted relationships with organizations to support
-              leadership transitions, growth initiatives, and strategic change.
-            </p>
+              <p className="text-[#5b6f77] text-[15px] leading-[1.8] font-light">
+                Appointments at functional head level and above carry enterprise-wide consequences, directly influencing performance and long-term value creation.
+              </p>
 
+            </div>
           </motion.div>
 
         </motion.div>
+
+        {/* Closing Line */}
+        <p className="mt-14 text-[#0F4C5C] font-medium">
+          We approach these decisions with the rigour they demand.
+        </p>
 
       </div>
 
