@@ -1,13 +1,38 @@
-.leaflet-tooltip.custom-tooltip {
-  background: #f5f5f5;
-  color: #111;
-  border-radius: 16px;
-  padding: 10px 18px;
-  font-size: 14px;
-  border: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.leaflet-tooltip.custom-tooltip::before {
-  border-top-color: #f5f5f5;
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0F4C5C;
+}
+
+/* FIXED INPUT STYLE */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: #ffffff; /* <-- THIS FIXES VISIBILITY */
+  border: 1px solid #e6dcc6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #0F4C5C;
+  transition: all 0.25s ease;
+}
+
+/* Placeholder visible */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #5b6f77aa;
+}
+
+/* Focus state */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #C9A23F;
+  box-shadow: 0 0 0 3px rgba(201, 162, 63, 0.15);
 }

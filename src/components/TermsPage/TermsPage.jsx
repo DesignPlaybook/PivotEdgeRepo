@@ -1,16 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
+import PageHero from "../PageHero/PageHero";
 
 const containerVariants = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.18 },
   },
 };
 
 const fadeIn = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 35 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
 };
 
 const TermsPage = () => {
@@ -53,65 +58,51 @@ const TermsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0B222A] via-[#112F39] to-[#0B222A] text-white relative overflow-hidden">
-      {/* Subtle Ambient Accent */}
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#D4B15A]/10 blur-[140px] rounded-full" />
+    <div className="min-h-screen bg-[#F4F1EA] relative overflow-hidden">
+      {/* Gold Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#C9A23F22,transparent_60%)]"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-28">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-20"
-        >
-          <h1 className="text-5xl font-light tracking-wide">
-            Terms & <span className="text-[#D4B15A]">Conditions</span>
-          </h1>
-
-          <div className="h-[2px] w-24 bg-[#D4B15A] mt-6"></div>
-
-          <p className="text-white/60 mt-6 text-lg max-w-3xl">
-            These Terms outline the legal framework governing executive advisory
-            engagements and website usage.
-          </p>
-        </motion.div>
-
+      <PageHero
+        label="Governance Framework"
+        title="Corporate"
+        highlight="Policies"
+        subtitle="Ethical governance, compliance standards, and professional integrity define our executive advisory approach."
+      />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
         {/* Sections */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate="show"
-          className="space-y-14"
+          whileInView="show"
+          className="space-y-10"
         >
           {sections.map((section, index) => (
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-white/[0.02] border border-white/10 rounded-2xl p-10 backdrop-blur-lg shadow-[0_20px_60px_rgba(0,0,0,0.4)] relative overflow-hidden"
+              whileHover={{ y: -6 }}
+              className="group p-[1px] rounded-2xl bg-gradient-to-br from-[#C9A23F]/40 via-white/40 to-transparent transition duration-500"
             >
-              {/* Gold Divider Sweep Animation */}
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-                className="absolute top-0 left-0 h-[2px] bg-[#D4B15A]/60"
-              />
+              <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-10 border border-white/40 shadow-sm hover:shadow-xl transition duration-500 overflow-hidden">
+                {/* Top Accent Line */}
+                <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#C9A23F] via-[#0F4C5C] to-[#C9A23F]"></span>
 
-              <h2 className="text-xl text-white mb-4 font-medium">
-                {section.title}
-              </h2>
+                <h2 className="text-xl font-semibold text-[#0F4C5C] mb-4">
+                  {section.title}
+                </h2>
 
-              <p className="text-white/70 leading-relaxed">{section.content}</p>
+                <p className="text-[#5b6f77] leading-[1.8] text-[15px] font-light">
+                  {section.content}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Footer Legal Line */}
-        <div className="mt-24 text-white/40 text-sm">
+        {/* Footer */}
+        <p className="mt-20 text-[#0F4C5C]/60 text-sm">
           © {new Date().getFullYear()} PivotEdge Partners. Legal Framework.
-        </div>
+        </p>
       </div>
     </div>
   );

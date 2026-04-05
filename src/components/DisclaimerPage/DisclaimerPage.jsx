@@ -1,115 +1,85 @@
 import React from "react";
 import { motion } from "framer-motion";
+import PageHero from "../PageHero/PageHero";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 35 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
 };
 
 const DisclaimerPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#071E26] via-[#0B2C36] to-[#071E26] text-white relative overflow-hidden">
-      {/* Soft ambient glows */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1B6F7A]/30 blur-[160px] rounded-full" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#C6A437]/10 blur-[160px] rounded-full" />
+    <div className="bg-[#F4F1EA] relative overflow-hidden">
+      {/* HERO */}
+      <PageHero
+        label="Legal Notice"
+        title="Legal"
+        highlight="Disclaimer"
+        subtitle="Important information governing the use of our advisory services and platform."
+      />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-28">
-        {/* Animated Gold Line */}
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "120px" }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="h-[2px] bg-[#C6A437] mb-10"
-        />
-
-        <motion.h1
-          variants={fadeInUp}
-          initial="hidden"
-          animate="show"
-          className="text-5xl font-light tracking-wide mb-12"
-        >
-          Legal <span className="text-[#C6A437]">Disclaimer</span>
-        </motion.h1>
-
+      {/* CONTENT */}
+      <div className="max-w-5xl mx-auto px-6 py-16 relative z-10">
+        {/* Main Card */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate="show"
-          transition={{ delay: 0.2 }}
-          className="bg-white/[0.04] backdrop-blur-xl border border-[#C6A437]/40 rounded-3xl p-14 shadow-[0_40px_80px_rgba(0,0,0,0.6)] space-y-10 text-white/75 leading-relaxed"
+          className="group p-[1px] rounded-2xl bg-gradient-to-br from-[#C9A23F]/40 via-white/40 to-transparent transition duration-500"
         >
-          <section>
-            <h2 className="text-xl text-white mb-4 font-medium">
-              Professional Advisory Notice
-            </h2>
-            <p>
-              PivotEdge Partners provides executive search and human capital
-              advisory services. While we strive to ensure accuracy and
-              strategic alignment in all engagements, we do not guarantee
-              specific hiring outcomes, employment decisions, or organizational
-              performance results arising from advisory recommendations.
-            </p>
-          </section>
+          <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-10 md:p-12 border border-white/40 shadow-sm hover:shadow-xl transition duration-500 overflow-hidden space-y-10">
+            {/* Top Accent Line */}
+            <span className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#C9A23F] via-[#0F4C5C] to-[#C9A23F]"></span>
 
-          <section>
-            <h2 className="text-xl text-white mb-4 font-medium">
-              No Employment Guarantee
-            </h2>
-            <p>
-              Submission of resumes, executive profiles, or candidate
-              information does not constitute an offer of employment. All hiring
-              decisions remain solely at the discretion of client organizations.
-            </p>
-          </section>
+            {/* Sections */}
+            {[
+              {
+                title: "Professional Advisory Notice",
+                text: "PivotEdge Partners provides executive search and human capital advisory services. While we strive to ensure accuracy and strategic alignment in all engagements, we do not guarantee specific hiring outcomes, employment decisions, or organizational performance results arising from advisory recommendations.",
+              },
+              {
+                title: "No Employment Guarantee",
+                text: "Submission of resumes, executive profiles, or candidate information does not constitute an offer of employment. All hiring decisions remain solely at the discretion of client organizations.",
+              },
+              {
+                title: "Third-Party Information",
+                text: "Any information sourced from external parties, including candidate credentials, references, or background data, is presented in good faith. PivotEdge Partners assumes no liability for inaccuracies beyond our direct verification scope.",
+              },
+              {
+                title: "Limitation of Liability",
+                text: "Under no circumstances shall PivotEdge Partners be held liable for indirect, incidental, or consequential damages arising from the use of this website or our professional services.",
+              },
+              {
+                title: "Intellectual Property",
+                text: "All proprietary methodologies, frameworks, branding, and content remain the intellectual property of PivotEdge Partners and may not be reproduced without prior written consent.",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ y: -4 }}
+                className="transition duration-300"
+              >
+                <h2 className="text-xl font-semibold text-[#0F4C5C] mb-3">
+                  {item.title}
+                </h2>
 
-          <section>
-            <h2 className="text-xl text-white mb-4 font-medium">
-              Third-Party Information
-            </h2>
-            <p>
-              Any information sourced from external parties, including candidate
-              credentials, references, or background data, is presented in good
-              faith. PivotEdge Partners assumes no liability for inaccuracies
-              beyond our direct verification scope.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl text-white mb-4 font-medium">
-              Limitation of Liability
-            </h2>
-            <p>
-              Under no circumstances shall PivotEdge Partners be held liable for
-              indirect, incidental, or consequential damages arising from the
-              use of this website or our professional services.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl text-white mb-4 font-medium">
-              Intellectual Property
-            </h2>
-            <p>
-              All proprietary methodologies, frameworks, branding, and content
-              remain the intellectual property of PivotEdge Partners and may not
-              be reproduced without prior written consent.
-            </p>
-          </section>
+                <p className="text-[#5b6f77] leading-[1.8] text-[15px] font-light">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Footer line */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-14 text-white/40 text-sm"
-        >
+        {/* Footer */}
+        <p className="mt-16 text-[#0F4C5C]/60 text-sm">
           © {new Date().getFullYear()} PivotEdge Partners. All rights reserved.
-        </motion.div>
+        </p>
       </div>
     </div>
   );
