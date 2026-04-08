@@ -264,46 +264,60 @@ const DifferentiatorsSection = () => (
         subtitle="Six principles that define our approach and separate advisory excellence from conventional search."
       />
     </FadeUp>
+
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
         gap: 24,
+        alignItems: "stretch",
       }}
     >
       {differentiators.map((d, i) => (
         <FadeUp key={d.title} delay={i * 0.08}>
-          <GlassCard>
-            <div
-              style={{
-                width: 32,
-                height: 2,
-                background: C.gold,
-                marginBottom: 20,
-                borderRadius: 2,
-              }}
-            />
-            <h3
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "1.25rem",
-                fontWeight: 500,
-                color: C.teal,
-                marginBottom: 12,
-              }}
-            >
-              {d.title}
-            </h3>
-            <p
-              style={{
-                color: C.muted,
-                fontSize: "0.95rem",
-                lineHeight: 1.7,
-                fontWeight: 300,
-              }}
-            >
-              {d.body}
-            </p>
+          <GlassCard
+            style={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              padding: "22px 20px",
+            }}
+          >
+            <div style={{ flexGrow: 1 }}>
+              <div
+                style={{
+                  width: 32,
+                  height: 2,
+                  background: C.gold,
+                  marginBottom: 20,
+                  borderRadius: 2,
+                }}
+              />
+
+              <h3
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "1.25rem",
+                  fontWeight: 500,
+                  color: C.teal,
+                  marginBottom: 12,
+                }}
+              >
+                {d.title}
+              </h3>
+
+              <p
+                style={{
+                  color: C.muted,
+                  fontSize: "0.95rem",
+                  lineHeight: 1.7,
+                  fontWeight: 300,
+                }}
+              >
+                {d.body}
+              </p>
+            </div>
           </GlassCard>
         </FadeUp>
       ))}
@@ -558,47 +572,55 @@ const BoardsSection = () => (
       style={{
         marginTop: 56,
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+        gridTemplateColumns: "repeat(2, 1fr)", // ✅ FORCE 2x2 GRID
         gap: 24,
       }}
     >
       {boardApproach.map((item, i) => (
         <FadeUp key={item.step} delay={i * 0.1}>
-          <GlassCard>
-            <div
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "2.2rem",
-                color: C.gold,
-                opacity: 0.4,
-                fontWeight: 300,
-                marginBottom: 12,
-                lineHeight: 1,
-              }}
-            >
-              {item.step}
+          <GlassCard
+            style={{
+              height: "100%", // ✅ SAME HEIGHT
+              display: "flex",
+              flexDirection: "column",
+              padding: "24px 22px",
+            }}
+          >
+            <div style={{ flexGrow: 1 }}>
+              <div
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "2.2rem",
+                  color: C.gold,
+                  opacity: 0.4,
+                  marginBottom: 12,
+                }}
+              >
+                {item.step}
+              </div>
+
+              <h3
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "1.2rem",
+                  fontWeight: 500,
+                  color: C.teal,
+                  marginBottom: 12,
+                }}
+              >
+                {item.title}
+              </h3>
+
+              <p
+                style={{
+                  color: C.muted,
+                  fontSize: "0.93rem",
+                  lineHeight: 1.7,
+                }}
+              >
+                {item.body}
+              </p>
             </div>
-            <h3
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "1.2rem",
-                fontWeight: 500,
-                color: C.teal,
-                marginBottom: 12,
-              }}
-            >
-              {item.title}
-            </h3>
-            <p
-              style={{
-                color: C.muted,
-                fontSize: "0.93rem",
-                lineHeight: 1.7,
-                fontWeight: 300,
-              }}
-            >
-              {item.body}
-            </p>
           </GlassCard>
         </FadeUp>
       ))}
@@ -632,7 +654,13 @@ const ceoFramework = [
 
 const CEOSection = () => (
   <SectionWrapper id="ceo" style={{ background: "#edeae2" }}>
-    <div style={{ background: "#edeae2", borderRadius: 24, padding: "48px 0" }}>
+    <div
+      style={{
+        background: "#edeae2",
+        borderRadius: 24,
+        padding: "48px 28px",
+      }}
+    >
       <FadeUp>
         <SectionHeading
           label="Chief Executive Officer"
@@ -647,50 +675,58 @@ const CEOSection = () => (
         />
       </FadeUp>
 
+      {/* GRID */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
           gap: 20,
+          alignItems: "stretch", // ✅ IMPORTANT
         }}
       >
         {ceoFramework.map((item, i) => (
           <FadeUp key={item.title} delay={i * 0.09}>
+            {/* CARD */}
             <GlassCard
               style={{
-                borderTop: `3px solid ${i % 2 === 0 ? C.gold : "transparent"}`,
-                borderImage:
-                  i % 2 === 0
-                    ? undefined
-                    : `linear-gradient(90deg, ${C.gold}, ${C.teal}) 1`,
+                height: "100%", // ✅ FORCE SAME HEIGHT
+                display: "flex",
+                flexDirection: "column",
+                borderTop: `3px solid ${C.gold}`, // ✅ CLEAN BORDER
+                padding: "22px 20px",
               }}
             >
-              <h3
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.2rem",
-                  fontWeight: 600,
-                  color: C.teal,
-                  marginBottom: 10,
-                }}
-              >
-                {item.title}
-              </h3>
-              <p
-                style={{
-                  color: C.muted,
-                  fontSize: "0.93rem",
-                  lineHeight: 1.7,
-                  fontWeight: 300,
-                }}
-              >
-                {item.body}
-              </p>
+              {/* CONTENT WRAPPER */}
+              <div style={{ flexGrow: 1 }}>
+                <h3
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "1.2rem",
+                    fontWeight: 600,
+                    color: C.teal,
+                    marginBottom: 10,
+                  }}
+                >
+                  {item.title}
+                </h3>
+
+                <p
+                  style={{
+                    color: C.muted,
+                    fontSize: "0.93rem",
+                    lineHeight: 1.7,
+                    fontWeight: 300,
+                  }}
+                >
+                  {item.body}
+                </p>
+              </div>
             </GlassCard>
           </FadeUp>
         ))}
       </div>
 
+      {/* QUOTE BLOCK */}
       <FadeUp delay={0.4}>
         <div
           style={{
@@ -718,6 +754,7 @@ const CEOSection = () => (
             candidates within that broader governance ecosystem — not in
             isolation."
           </p>
+
           <p
             style={{
               color: C.gold,

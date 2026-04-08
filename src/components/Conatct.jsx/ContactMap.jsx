@@ -36,6 +36,42 @@ const ContactPage = () => {
     iconAnchor: [20, 20],
   });
 
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    company: "",
+    jobTitle: "",
+    email: "",
+    phone: "",
+    country: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validate = () => {
+    let newErrors = {};
+
+    if (!formData.firstName.trim())
+      newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+      newErrors.email = "Valid email required";
+    if (!formData.phone.match(/^[0-9+\-\s]{7,15}$/))
+      newErrors.phone = "Valid phone required";
+    if (!formData.message.trim()) newErrors.message = "Message required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#F4F1EA] text-[#0F4C5C] overflow-hidden relative">
       {/* HERO */}
@@ -156,65 +192,137 @@ const ContactPage = () => {
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setShowConsent(true);
+                  if (validate()) {
+                    setShowConsent(true);
+                  }
                 }}
               >
                 {/* First Name */}
                 <div className="form-group">
                   <label>First Name</label>
-                  <input type="text" placeholder="Enter first name" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="Enter first name"
+                  />
+                  {errors.firstName && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.firstName}
+                    </p>
+                  )}
                 </div>
 
                 {/* Last Name */}
                 <div className="form-group">
                   <label>Last Name</label>
-                  <input type="text" placeholder="Enter last name" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Enter last name"
+                  />
+                  {errors.lastName && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.lastName}
+                    </p>
+                  )}
                 </div>
 
                 {/* Company */}
                 <div className="form-group">
                   <label>Company</label>
-                  <input type="text" placeholder="Your company" />
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder="Your company"
+                  />
                 </div>
 
                 {/* Job Title */}
                 <div className="form-group">
                   <label>Job Title</label>
-                  <input type="text" placeholder="Your role" />
+                  <input
+                    type="text"
+                    name="jobTitle"
+                    value={formData.jobTitle}
+                    onChange={handleChange}
+                    placeholder="Your role"
+                  />
                 </div>
 
                 {/* Email */}
                 <div className="form-group">
                   <label>Email Address</label>
-                  <input type="email" placeholder="you@example.com" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 {/* Phone */}
                 <div className="form-group">
                   <label>Phone Number</label>
-                  <input type="text" placeholder="+91..." />
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="+91..."
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                  )}
                 </div>
 
                 {/* Country */}
                 <div className="form-group md:col-span-2">
                   <label>Country</label>
-                  <input type="text" placeholder="Your country" />
+                  <input
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    placeholder="Your country"
+                  />
                 </div>
 
                 {/* Message */}
                 <div className="form-group md:col-span-2">
                   <label>How can we help you?</label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows="5"
                     placeholder="Tell us about your requirement..."
                     className="resize-none"
                   />
+                  {errors.message && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 {/* Button */}
                 <button
                   type="button" // IMPORTANT: not submit
-                  onClick={() => setShowConsent(true)}
+                  onClick={() => {
+                    if (validate()) {
+                      setShowConsent(true);
+                    }
+                  }}
                   className="md:col-span-2 mt-2 bg-gradient-to-r from-[#C9A23F] to-[#E5C76B] 
   text-[#0F4C5C] font-semibold py-4 rounded-xl tracking-wide
   hover:scale-[1.02] transition-all duration-300"
@@ -264,7 +372,40 @@ const ContactPage = () => {
                 onClick={() => {
                   if (accepted) {
                     setShowConsent(false);
-                    alert("Form submitted successfully!");
+
+                    const url =
+                      `https://docs.google.com/forms/d/e/1FAIpQLSeXJvdv1X5wQV5OB_I4pdIhrBr424TlriUjPucIAFWJEmP5aA/formResponse?` +
+                      `entry.1691488305=${encodeURIComponent(formData.firstName)}` +
+                      `&entry.469759994=${encodeURIComponent(formData.lastName)}` +
+                      `&entry.1790880522=${encodeURIComponent(formData.company)}` +
+                      `&entry.1970432674=${encodeURIComponent(formData.jobTitle)}` +
+                      `&entry.918071452=${encodeURIComponent(formData.email)}` +
+                      `&entry.584228645=${encodeURIComponent(formData.phone)}` +
+                      `&entry.902959798=${encodeURIComponent(formData.country)}` +
+                      `&entry.1728949981=${encodeURIComponent(formData.message)}`;
+
+                    fetch(url, {
+                      method: "POST",
+                      mode: "no-cors",
+                    });
+
+                    // ✅ Clear form
+                    setFormData({
+                      firstName: "",
+                      lastName: "",
+                      company: "",
+                      jobTitle: "",
+                      email: "",
+                      phone: "",
+                      country: "",
+                      message: "",
+                    });
+
+                    // ✅ Reset states
+                    setAccepted(false);
+
+                    // ✅ Show success popup
+                    setShowSuccess(true);
                   }
                 }}
                 className={`px-5 py-2 rounded-lg text-sm font-medium transition
@@ -277,6 +418,27 @@ const ContactPage = () => {
                 Accept & Submit
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {showSuccess && (
+        <div className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-center justify-center px-6">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-xl text-center">
+            <h3 className="text-2xl font-semibold text-[#0F4C5C] mb-3">
+              Thank You!
+            </h3>
+
+            <p className="text-[#5b6f77] text-sm mb-6">
+              We’ve received your inquiry. Our team will connect with you
+              shortly.
+            </p>
+
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="bg-[#C9A23F] text-white px-6 py-2 rounded-lg"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
