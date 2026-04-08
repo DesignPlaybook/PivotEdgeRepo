@@ -355,7 +355,17 @@ const ContactPage = () => {
                 className="w-4 h-4 accent-[#C9A23F]"
               />
               <span className="text-sm text-[#5b6f77]">
-                I agree to the Privacy Policy and Terms.
+                <span>
+                  I agree to the{" "}
+                  <a
+                    href="/policies"
+                    className="text-[#C9A23F] underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                </span>
               </span>
             </div>
 
