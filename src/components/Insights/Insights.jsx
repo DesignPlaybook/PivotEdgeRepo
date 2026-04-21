@@ -920,10 +920,15 @@ export default function InsightsPage() {
       <div style={{ fontFamily: "'Jost', sans-serif" }}>
         <PageHero />
         <DifferentiatorsSection />
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60"></div>
         <MandatesSection />
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60"></div>
         <OutcomesSection />
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60"></div>
         <BoardsSection />
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60"></div>
         <CEOSection />
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60"></div>
         <AISection />
       </div>
     </>

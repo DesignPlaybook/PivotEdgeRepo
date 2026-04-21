@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import hero1 from "../../assets/images/hero.jpeg";
 import hero2 from "../../assets/images/hero1.jpg";
@@ -18,7 +19,6 @@ const Hero = () => {
 
   return (
     <section className="relative w-full overflow-hidden min-h-[80vh] md:min-h-screen">
-
       {/* Background Images */}
       {images.map((img, index) => (
         <motion.img
@@ -58,14 +58,12 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center md:justify-start min-h-[80vh] md:min-h-screen">
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: "easeOut" }}
           className="max-w-4xl px-6 md:px-12 text-center md:text-left"
         >
-
           {/* Accent Line */}
           <motion.div
             initial={{ width: 0 }}
@@ -112,8 +110,8 @@ const Hero = () => {
             "
           >
             PivotEdge Partners is a specialist executive search and leadership
-            advisory firm partnering with Boards and senior executives to
-            secure leadership that shapes strategy, governance, and long-term
+            advisory firm partnering with Boards and senior executives to secure
+            leadership that shapes strategy, governance, and long-term
             enterprise performance.
           </p>
 
@@ -129,39 +127,42 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <Link to="/services">
+              <button
+                className="
+                    bg-brand-gold text-black
+                    px-7 py-3 md:px-8 md:py-4
+                    rounded-lg
+                    font-medium tracking-wide
+                    shadow-lg shadow-brand-gold/30
+                    hover:scale-[1.05]
+                    hover:shadow-xl
+                    transition-all duration-300
+                    cursor-pointer
+                    "
+              >
+                Explore Services
+              </button>
+            </Link>
 
-            <button
+            <Link
+              to="/about"
               className="
-              bg-brand-gold text-black
-              px-7 py-3 md:px-8 md:py-4
-              rounded-lg
-              font-medium tracking-wide
-              shadow-lg shadow-brand-gold/30
-              hover:scale-[1.05]
-              hover:shadow-xl
-              transition-all duration-300
-              "
-            >
-              Explore Services
-            </button>
-
-            <button
-              className="
-              border border-white/70
-              text-white
-              px-7 py-3 md:px-8 md:py-4
-              rounded-lg
-              backdrop-blur-md
-              bg-white/10
-              hover:bg-white hover:text-black
-              transition-all duration-300
-              "
+                inline-block
+                border border-white/70
+                text-white
+                px-7 py-3 md:px-8 md:py-4
+                rounded-lg
+                backdrop-blur-md
+                bg-white/10
+                hover:bg-white hover:text-black
+                transition-all duration-300
+                cursor-pointer
+                "
             >
               View Our Approach
-            </button>
-
+            </Link>
           </div>
-
         </motion.div>
       </div>
 
@@ -180,7 +181,6 @@ const Hero = () => {
           <div className="w-[3px] h-[6px] bg-white mt-2 rounded-full" />
         </div>
       </motion.div>
-
     </section>
   );
 };

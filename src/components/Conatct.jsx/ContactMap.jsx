@@ -325,7 +325,7 @@ const ContactPage = () => {
                   }}
                   className="md:col-span-2 mt-2 bg-gradient-to-r from-[#C9A23F] to-[#E5C76B] 
   text-[#0F4C5C] font-semibold py-4 rounded-xl tracking-wide
-  hover:scale-[1.02] transition-all duration-300"
+  hover:scale-[1.02] transition-all duration-300 cursor-pointer"
                 >
                   SUBMIT INQUIRY
                 </button>

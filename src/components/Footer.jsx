@@ -40,13 +40,25 @@ const Footer = () => {
             </h4>
 
             <ul className="space-y-1 sm:space-y-2 text-[11px] sm:text-xs md:text-sm">
-              <li className="hover:text-[#d4af37] cursor-pointer">About Us</li>
               <li className="hover:text-[#d4af37] cursor-pointer">
-                Leadership
+                <Link to="/about">About Us</Link>
               </li>
-              <li className="hover:text-[#d4af37] cursor-pointer">Careers</li>
-              <li className="hover:text-[#d4af37] cursor-pointer">Insights</li>
-              <li className="hover:text-[#d4af37] cursor-pointer">Contact</li>
+
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                <Link to="/services">Services</Link>
+              </li>
+
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                <Link to="/domains">Domain</Link>
+              </li>
+
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                <Link to="/insights">Insights</Link>
+              </li>
+
+              <li className="hover:text-[#d4af37] cursor-pointer">
+                <Link to="/contact">Contact</Link>
+              </li>
             </ul>
           </div>
 

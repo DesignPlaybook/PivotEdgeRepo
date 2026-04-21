@@ -50,7 +50,6 @@ const Navbar = () => {
       />
 
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-        
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
@@ -91,11 +90,7 @@ const Navbar = () => {
                     hover:-translate-y-[1px]
                     after:absolute after:left-0 after:-bottom-1.5
                     after:h-[2px] after:transition-all after:duration-300
-                    ${
-                      scrolled
-                        ? "after:bg-brand-teal"
-                        : "after:bg-white"
-                    }
+                    ${scrolled ? "after:bg-brand-teal" : "after:bg-white"}
                     ${isActive ? "after:w-full" : "after:w-0 hover:after:w-full"}
                   `}
                 >
@@ -121,11 +116,7 @@ const Navbar = () => {
       <div
         className={`md:hidden overflow-hidden transition-all duration-700 ease-out
           ${menuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}
-          ${
-            scrolled
-              ? "bg-white"
-              : "bg-black/90 backdrop-blur-xl"
-          }
+          ${scrolled ? "bg-white" : "bg-black/90 backdrop-blur-xl"}
         `}
       >
         <ul className="flex flex-col gap-6 px-6 py-8 text-lg font-medium">
@@ -136,11 +127,7 @@ const Navbar = () => {
                 onClick={() => setMenuOpen(false)}
                 className={`block transition-all duration-300
                   hover:translate-x-1
-                  ${
-                    scrolled
-                      ? "text-brand-charcoal"
-                      : "text-white"
-                  }
+                  ${scrolled ? "text-brand-charcoal" : "text-white"}
                 `}
               >
                 {item.name}
