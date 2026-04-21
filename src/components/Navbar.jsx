@@ -58,8 +58,8 @@ const Navbar = () => {
             className={`transition-all duration-500
               ${
                 scrolled
-                  ? "h-12 scale-100 brightness-100"
-                  : "h-16 scale-[1.05] brightness-180 drop-shadow-[0_8px_22px_rgba(0,0,0,0.4)]"
+                  ? "h-12 scale-100"
+                  : "h-16 scale-[1.05] drop-shadow-[0_8px_22px_rgba(0,0,0,0.4)]"
               }
             `}
           />
