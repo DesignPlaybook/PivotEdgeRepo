@@ -30,11 +30,11 @@ function StatCard({ value, suffix, label, delay, triggerCount }) {
       transition={{ delay, duration: 0.6 }}
       className="flex flex-col items-center"
     >
-      <div className="text-5xl md:text-6xl font-light text-[#0F4C5C] leading-none">
+      <div className="text-5xl md:text-6xl font-light text-white leading-none">
         <span className="font-semibold text-[#C9A23F]">{count}</span>
         <span className="text-[#C9A23F] text-4xl">{suffix}</span>
       </div>
-      <div className="mt-2 text-sm tracking-[0.2em] text-[#5b6f77] uppercase font-light">
+      <div className="mt-2 text-sm tracking-[0.2em] text-gray-400 uppercase font-light">
         {label}
       </div>
     </motion.div>
@@ -532,16 +532,14 @@ const functions = [
 function ProcessStep({ number, label, desc, isLast }) {
   return (
     <div className="flex flex-col items-center text-center relative">
-      <div className="w-14 h-14 rounded-full border border-[#C9A23F]/60 bg-white flex items-center justify-center mb-3 relative z-10 shadow-sm">
+      <div className="w-14 h-14 rounded-full border border-[#C9A23F]/60 bg-[#123845] flex items-center justify-center mb-3 relative z-10">
         <span className="text-[#C9A23F] font-light text-lg">{number}</span>
       </div>
       {!isLast && (
         <div className="absolute top-7 left-[calc(50%+28px)] w-[calc(100%-56px)] h-[1px] bg-gradient-to-r from-[#C9A23F]/60 to-transparent hidden md:block" />
       )}
-      <p className="text-[#0F4C5C] text-sm font-medium tracking-wide">
-        {label}
-      </p>
-      <p className="text-[#5b6f77] text-xs mt-1 max-w-[120px] leading-relaxed">
+      <p className="text-white text-sm font-medium tracking-wide">{label}</p>
+      <p className="text-gray-400 text-xs mt-1 max-w-[120px] leading-relaxed">
         {desc}
       </p>
     </div>
@@ -654,7 +652,7 @@ const Services = () => {
       {/* ══════════════════════ STATS BAR ══════════════════════ */}
       <section
         ref={statsRef}
-        className="bg-[#F4F1EA] border-y border-[#e6dcc6] py-16 px-6"
+        className="bg-[#0F4C5C] border-y border-[#C9A23F]/20 py-16 px-6"
       >
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
           <StatCard
@@ -723,10 +721,10 @@ const Services = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="relative bg-white rounded-2xl overflow-hidden flex flex-col justify-between p-10 md:p-14 min-h-[480px] border border-[#e6dcc6] shadow-md"
+              className="relative bg-[#0F4C5C] rounded-2xl overflow-hidden flex flex-col justify-between p-10 md:p-14 min-h-[480px]"
             >
               {/* Background geo watermark */}
-              <div className="absolute bottom-0 right-0 w-72 h-72 opacity-[0.05] pointer-events-none translate-x-10 translate-y-10">
+              <div className="absolute bottom-0 right-0 w-72 h-72 opacity-[0.06] pointer-events-none translate-x-10 translate-y-10">
                 <GeometricAccent />
               </div>
               {/* Gold top bar */}
@@ -735,12 +733,13 @@ const Services = () => {
               {/* Top row: counter + icon */}
               <div className="flex items-start justify-between mb-8">
                 <span
-                  className="text-[80px] font-light text-[#C9A23F]/12 leading-none select-none"
+                  className="text-[80px] font-light text-[#C9A23F]/15 leading-none select-none"
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}
                 >
                   {String(activeService + 1).padStart(2, "0")}
                 </span>
-                <div className="w-16 h-16 rounded-xl border border-[#C9A23F]/30 bg-[#C9A23F]/8 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-xl border border-[#C9A23F]/25 bg-[#C9A23F]/10 flex items-center justify-center">
+                  {/* Scale up the existing icon */}
                   <div className="scale-125">
                     {serviceIcons[services[activeService].title]}
                   </div>
@@ -754,13 +753,13 @@ const Services = () => {
                   {String(services.length).padStart(2, "0")}
                 </p>
                 <h3
-                  className="text-3xl md:text-4xl font-light text-[#0F4C5C] mb-5"
+                  className="text-3xl md:text-4xl font-light text-white mb-5"
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}
                 >
                   {services[activeService].title}
                 </h3>
                 <div className="w-10 h-[2px] bg-[#C9A23F] mb-6" />
-                <p className="text-[#5b6f77] text-[15px] leading-[1.95] font-light whitespace-pre-line max-w-xl">
+                <p className="text-gray-300 text-[15px] leading-[1.95] font-light whitespace-pre-line max-w-xl">
                   {services[activeService].content}
                 </p>
               </div>
@@ -770,7 +769,7 @@ const Services = () => {
                 <button
                   onClick={() => setActiveService((i) => Math.max(0, i - 1))}
                   disabled={activeService === 0}
-                  className="w-9 h-9 rounded-full border border-[#0F4C5C]/25 flex items-center justify-center hover:border-[#C9A23F] hover:bg-[#C9A23F]/10 transition disabled:opacity-20 text-[#0F4C5C]"
+                  className="w-9 h-9 rounded-full border border-[#C9A23F]/30 flex items-center justify-center hover:border-[#C9A23F] hover:bg-[#C9A23F]/10 transition disabled:opacity-20 text-[#C9A23F]"
                 >
                   <svg viewBox="0 0 20 20" className="w-4 h-4" fill="none">
                     <polyline
@@ -788,7 +787,7 @@ const Services = () => {
                     )
                   }
                   disabled={activeService === services.length - 1}
-                  className="w-9 h-9 rounded-full border border-[#0F4C5C]/25 flex items-center justify-center hover:border-[#C9A23F] hover:bg-[#C9A23F]/10 transition disabled:opacity-20 text-[#0F4C5C]"
+                  className="w-9 h-9 rounded-full border border-[#C9A23F]/30 flex items-center justify-center hover:border-[#C9A23F] hover:bg-[#C9A23F]/10 transition disabled:opacity-20 text-[#C9A23F]"
                 >
                   <svg viewBox="0 0 20 20" className="w-4 h-4" fill="none">
                     <polyline
@@ -894,15 +893,20 @@ const Services = () => {
       </section>
 
       {/* ══════════════════════ PROCESS STEPS ══════════════════════ */}
-      <section className="bg-[#EAE6DC] py-20 px-6 relative overflow-hidden">
-        <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#C9A23F0A,transparent_60%)]" />
-        <div className="max-w-5xl mx-auto relative z-10">
+      <section className="bg-[#123845] py-20 px-6 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(90deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px)",
+          }}
+        />
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-[#C9A23F] text-xs tracking-[0.35em] uppercase mb-2">
               How We Work
             </p>
-            <h2 className="text-[#0F4C5C] text-3xl font-light">
+            <h2 className="text-white text-3xl font-light">
               Our <span className="text-[#C9A23F] font-semibold">Process</span>
             </h2>
           </div>
@@ -947,7 +951,7 @@ const Services = () => {
       </section>
 
       {/* ══════════════════════ FUNCTIONS ══════════════════════ */}
-      <section className="bg-[#F4F1EA] py-24 relative overflow-hidden">
+      <section className="bg-white py-24 relative overflow-hidden">
         <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
 
         {/* Large decorative org chart watermark */}

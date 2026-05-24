@@ -6,7 +6,7 @@ const PageHero = ({ label, title, highlight, subtitle }) => {
       {/* Background */}
       <div
         className="absolute inset-0 
-        bg-[radial-gradient(circle_at_top,#C9A23F33,transparent_60%),linear-gradient(to_bottom,#06151a,#0b1f26)]
+        bg-[radial-gradient(circle_at_top,#C9A23F33,transparent_60%),linear-gradient(to_bottom,#06151a,#123845)]
         opacity-95"
       />
 

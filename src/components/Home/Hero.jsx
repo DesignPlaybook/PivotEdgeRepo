@@ -145,23 +145,27 @@ const Hero = () => {
               </button>
             </Link>
 
-            <Link
-              to="/about"
+            <button
+              onClick={() =>
+                document.getElementById("how-we-work")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
               className="
-                inline-block
-                border border-white/70
-                text-white
-                px-7 py-3 md:px-8 md:py-4
-                rounded-lg
-                backdrop-blur-md
-                bg-white/10
-                hover:bg-white hover:text-black
-                transition-all duration-300
-                cursor-pointer
-                "
+    inline-block
+    border border-white/70
+    text-white
+    px-7 py-3 md:px-8 md:py-4
+    rounded-lg
+    backdrop-blur-md
+    bg-white/10
+    hover:bg-white hover:text-black
+    transition-all duration-300
+    cursor-pointer
+    "
             >
               View Our Approach
-            </Link>
+            </button>
           </div>
         </motion.div>
       </div>

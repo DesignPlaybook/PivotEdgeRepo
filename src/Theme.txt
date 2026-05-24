@@ -1,0 +1,56 @@
+:root {
+  --color-teal: #0F4C5C;
+  --color-gold: #C9A23F;
+
+  --color-cream: #F4F1EA;
+  --color-cream-alt: #EAE6DC;
+
+  --color-white: #FFFFFF;
+
+  --text-primary: #5B6F77;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+
+  --overlay-light: rgba(255,255,255,0.65);
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Jost", sans-serif;
+}
+
+| Usage              | Color             | Hex                      |
+| ------------------ | ----------------- | ------------------------ |
+| Primary Body Text  | Soft Charcoal     | `#5B6F77`                |
+| Secondary Text     | Muted Gray        | `#6B7280`                |
+| Light Neutral Text | Slate Gray        | `#9CA3AF`                |
+| White Overlay Text | Transparent White | `rgba(255,255,255,0.65)` |
+
+
+Visual Style Direction
+
+The palette strongly communicates:
+
+Luxury corporate
+Executive advisory
+Governance & trust
+Quiet luxury
+Editorial sophistication
+Enterprise professionalism
+Premium boardroom aesthetic
+
+Very similar to:
+
+Egon Zehnder
+Spencer Stuart
+Russell Reynolds
+Korn Ferry
+McKinsey editorial sections
+High-end private equity firms
+
+
+Typography:
+| Element             | Style                        |
+| ------------------- | ---------------------------- |
+| Serif Headlines     | Editorial luxury             |
+| Sans Body           | Clean corporate              |
+| Wide Letter Spacing | Executive sophistication     |
+| Uppercase Labels    | Governance / enterprise feel |

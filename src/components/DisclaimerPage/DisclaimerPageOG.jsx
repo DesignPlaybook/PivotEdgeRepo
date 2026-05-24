@@ -52,32 +52,32 @@ const GeometricAccent = ({ opacity = 0.2, color = "#C9A23F" }) => (
   </svg>
 );
 
-const sectionVariants = {
+const fadeInUp = {
   hidden: { opacity: 0, y: 35 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
-const PoliciesPage = () => {
-  const policies = [
+const DisclaimerPage = () => {
+  const sections = [
     {
-      title: "Data Protection & Confidentiality",
-      text: "All executive search engagements are conducted under strict confidentiality agreements. Candidate information, organizational data, and proprietary insights are protected under applicable data protection regulations.",
+      title: "Professional Advisory Notice",
+      text: "PivotEdge Partners provides executive search and human capital advisory services. While we strive to ensure accuracy and strategic alignment in all engagements, we do not guarantee specific hiring outcomes, employment decisions, or organizational performance results arising from advisory recommendations.",
     },
     {
-      title: "Equal Opportunity Commitment",
-      text: "PivotEdge Partners upholds non-discrimination principles across gender, ethnicity, religion, age, disability, and background. Executive selection is based solely on merit and strategic alignment.",
+      title: "No Employment Guarantee",
+      text: "Submission of resumes, executive profiles, or candidate information does not constitute an offer of employment. All hiring decisions remain solely at the discretion of client organizations.",
     },
     {
-      title: "Conflict of Interest Policy",
-      text: "We maintain transparent engagement boundaries to avoid conflicts of interest. Dual representation within competing organizations is governed by ethical screening frameworks.",
+      title: "Third-Party Information",
+      text: "Any information sourced from external parties, including candidate credentials, references, or background data, is presented in good faith. PivotEdge Partners assumes no liability for inaccuracies beyond our direct verification scope.",
     },
     {
-      title: "Compliance & Regulatory Standards",
-      text: "Our advisory practices align with international HR compliance frameworks and local employment regulations applicable within each operational jurisdiction.",
+      title: "Limitation of Liability",
+      text: "Under no circumstances shall PivotEdge Partners be held liable for indirect, incidental, or consequential damages arising from the use of this website or our professional services.",
     },
     {
-      title: "Professional Conduct",
-      text: "All consultants adhere to structured executive search methodologies, maintaining integrity, discretion, and accountability throughout the hiring lifecycle.",
+      title: "Intellectual Property",
+      text: "All proprietary methodologies, frameworks, branding, and content remain the intellectual property of PivotEdge Partners and may not be reproduced without prior written consent.",
     },
   ];
 
@@ -117,22 +117,22 @@ const PoliciesPage = () => {
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-8 h-[1px] bg-[#C9A23F]" />
             <p className="text-[#C9A23F] tracking-[0.35em] text-xs font-medium uppercase">
-              Governance Framework
+              Legal Notice
             </p>
             <div className="w-8 h-[1px] bg-[#C9A23F]" />
           </div>
           <h1 className="text-white text-5xl md:text-7xl font-light leading-[1.1] tracking-wide mb-2">
-            Corporate
+            Legal
           </h1>
           <h1 className="text-[#C9A23F] text-5xl md:text-7xl font-semibold leading-[1.1] tracking-wide mb-8">
-            Policies
+            Disclaimer
           </h1>
           <div className="flex justify-center mb-10">
             <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent" />
           </div>
           <p className="text-gray-300 text-lg leading-[1.9] font-light max-w-2xl mx-auto">
-            Ethical governance, compliance standards, and professional integrity
-            define our executive advisory approach.
+            Important information governing the use of our advisory services and
+            platform.
           </p>
         </motion.div>
 
@@ -150,12 +150,12 @@ const PoliciesPage = () => {
       </section>
 
       {/* ══ CONTENT ══ */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
+      <div className="max-w-5xl mx-auto px-6 py-24 relative z-10">
         <div className="space-y-6">
-          {policies.map((policy, index) => (
+          {sections.map((item, index) => (
             <motion.div
               key={index}
-              variants={sectionVariants}
+              variants={fadeInUp}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -169,28 +169,22 @@ const PoliciesPage = () => {
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h2 className="text-lg md:text-xl font-semibold text-[#0F4C5C] mb-4 group-hover:text-[#C9A23F] transition-colors duration-300">
-                {policy.title}
+              <h2 className="text-lg font-semibold text-[#0F4C5C] mb-3 group-hover:text-[#C9A23F] transition-colors duration-300">
+                {item.title}
               </h2>
               <p className="text-[#5b6f77] leading-[1.9] text-[15px] font-light">
-                {policy.text}
+                {item.text}
               </p>
             </motion.div>
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-20 text-[#0F4C5C]/50 text-sm"
-        >
-          © {new Date().getFullYear()} PivotEdge Partners. Corporate Governance
-          Framework.
-        </motion.p>
+        <p className="mt-16 text-[#0F4C5C]/50 text-sm">
+          © {new Date().getFullYear()} PivotEdge Partners. All rights reserved.
+        </p>
       </div>
     </div>
   );
 };
 
-export default PoliciesPage;
+export default DisclaimerPage;

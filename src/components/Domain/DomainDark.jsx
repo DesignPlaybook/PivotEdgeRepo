@@ -614,7 +614,7 @@ export default function Domains() {
           className="absolute w-full h-full object-cover scale-105"
           alt=""
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#C9A23F22,transparent_60%),linear-gradient(to_bottom,#06151a,#123845)] opacity-97" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#C9A23F22,transparent_60%),linear-gradient(to_bottom,#0F4C5C,#123845)] opacity-97" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -715,16 +715,16 @@ export default function Domains() {
           {/* Interactive selector */}
           <div className="grid lg:grid-cols-[280px_1fr] gap-0 rounded-2xl overflow-hidden border border-[#e6dcc6] shadow-lg">
             {/* Tab nav */}
-            <div className="bg-[#EAE6DC] border-r border-[#e6dcc6]">
+            <div className="bg-[#0F4C5C]">
               {industries.map((ind, i) => (
                 <button
                   key={ind.key}
                   onClick={() => setActiveIndustry(i)}
-                  className={`w-full text-left px-7 py-5 border-b border-[#e6dcc6] flex items-center gap-4 group transition-all duration-300
-                    ${activeIndustry === i ? "bg-white border-l-4 border-l-[#C9A23F]" : "hover:bg-white/60 border-l-4 border-l-transparent"}`}
+                  className={`w-full text-left px-7 py-5 border-b border-white/5 flex items-center gap-4 group transition-all duration-300
+                    ${activeIndustry === i ? "bg-[#C9A23F]/15 border-l-4 border-l-[#C9A23F]" : "hover:bg-white/5 border-l-4 border-l-transparent"}`}
                 >
                   <div
-                    className={`transition-opacity flex-shrink-0 ${activeIndustry === i ? "opacity-100" : "opacity-40 group-hover:opacity-70"}`}
+                    className={`transition-opacity flex-shrink-0 ${activeIndustry === i ? "opacity-100" : "opacity-30 group-hover:opacity-60"}`}
                   >
                     {React.createElement(IndustryIllustrations[ind.key], {
                       color: "#C9A23F",
@@ -733,7 +733,7 @@ export default function Domains() {
                   <div>
                     <p
                       className={`text-xs font-medium tracking-wide transition-colors leading-tight
-                      ${activeIndustry === i ? "text-[#C9A23F]" : "text-[#5b6f77] group-hover:text-[#0F4C5C]"}`}
+                      ${activeIndustry === i ? "text-[#C9A23F]" : "text-gray-300 group-hover:text-white"}`}
                     >
                       {ind.title}
                     </p>
@@ -838,12 +838,18 @@ export default function Domains() {
         </div>
       </section>
 
-      {/* ══ EXECUTIVE SEARCH ══ */}
-      <section className="bg-[#F4F1EA] relative overflow-hidden py-24 px-6">
+      {/* ══ EXECUTIVE SEARCH — dark teal with angled right edge ══ */}
+      <section className="bg-[#123845] relative overflow-hidden py-24 px-6">
         <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#C9A23F14,transparent_60%)]" />
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(90deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px)",
+          }}
+        />
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 opacity-[0.06] pointer-events-none">
-          <Geo color="#C9A23F" opacity={1} />
+          <Geo />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -851,7 +857,7 @@ export default function Domains() {
           <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
             <FadeIn x={-30}>
               <GoldLabel>Executive Search</GoldLabel>
-              <h2 className="text-[#0F4C5C] text-4xl md:text-5xl font-light mt-3 leading-tight">
+              <h2 className="text-white text-4xl md:text-5xl font-light mt-3 leading-tight">
                 Search That Strengthens{" "}
                 <span
                   className="text-[#C9A23F] italic font-semibold"
@@ -863,14 +869,14 @@ export default function Domains() {
               <div className="mt-5 w-12 h-[2px] bg-[#C9A23F]" />
             </FadeIn>
             <FadeIn x={30} delay={0.1}>
-              <p className="text-[#5b6f77] text-sm leading-[1.9] font-light">
+              <p className="text-gray-400 text-sm leading-[1.9] font-light">
                 Leadership appointments are among the most consequential
                 decisions an organisation makes. PivotEdge Partners approaches
                 executive search as a strategic advisory engagement — working
                 closely with Boards to understand governance structure and
                 future leadership needs.
               </p>
-              <p className="text-[#5b6f77] text-sm leading-[1.9] font-light mt-4">
+              <p className="text-gray-400 text-sm leading-[1.9] font-light mt-4">
                 Our work is confidential, research-driven, and outcome-focused.
                 We are not intermediaries. We are advisors entrusted with
                 decisions that influence the direction of the enterprise.
@@ -879,24 +885,24 @@ export default function Domains() {
           </div>
 
           {/* 6-step process — horizontal numbered cards */}
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-0 border border-[#e6dcc6] rounded-2xl overflow-hidden bg-white/60">
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-0 border border-[#C9A23F]/15 rounded-2xl overflow-hidden">
             {approachSteps.map((step, i) => (
               <FadeUp key={step.n} delay={i * 0.07}>
                 <div
-                  className={`group relative p-6 hover:bg-[#F4F1EA] transition-all duration-300 h-full
-                  ${i < approachSteps.length - 1 ? "border-r border-[#e6dcc6]" : ""}`}
+                  className={`group relative p-6 hover:bg-white/5 transition-all duration-300 h-full
+                  ${i < approachSteps.length - 1 ? "border-r border-[#C9A23F]/12" : ""}`}
                 >
                   <span className="absolute top-0 left-0 w-0 h-[2px] bg-[#C9A23F] group-hover:w-full transition-all duration-500" />
                   <span
-                    className="block text-3xl font-light text-[#C9A23F]/30 mb-4 leading-none"
+                    className="block text-3xl font-light text-[#C9A23F]/20 mb-4 leading-none"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
                     {step.n}
                   </span>
-                  <h4 className="text-[#0F4C5C] text-xs font-semibold tracking-wide mb-3 leading-snug group-hover:text-[#C9A23F] transition-colors">
+                  <h4 className="text-white text-xs font-semibold tracking-wide mb-3 leading-snug group-hover:text-[#C9A23F] transition-colors">
                     {step.title}
                   </h4>
-                  <p className="text-[#5b6f77] text-xs leading-[1.8] font-light">
+                  <p className="text-gray-500 text-xs leading-[1.8] font-light">
                     {step.desc}
                   </p>
                 </div>
@@ -955,8 +961,8 @@ export default function Domains() {
         </div>
       </section>
 
-      {/* ══ OUTCOMES ══ */}
-      <section className="bg-[#EAE6DC] relative overflow-hidden py-24 px-6">
+      {/* ══ OUTCOMES — White bg, full-width animated checklist + editorial quote ══ */}
+      <section className="bg-white relative overflow-hidden py-24 px-6">
         <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
 
         <div className="max-w-7xl mx-auto relative z-10">

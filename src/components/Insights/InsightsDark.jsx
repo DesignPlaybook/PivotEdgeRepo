@@ -1,4 +1,3 @@
-// LIGHT THEME
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import bg from "../../assets/images/bg.webp";
@@ -170,13 +169,10 @@ const PageHero = () => (
       </div>
 
       <h1 className="text-white text-5xl md:text-7xl font-light leading-[1.1] tracking-wide mb-2">
-        Leadership That
+        Our
       </h1>
-      <h1
-        className="text-[#C9A23F] text-5xl md:text-7xl font-semibold leading-[1.1] tracking-wide mb-8"
-        style={{ fontStyle: "italic" }}
-      >
-        Defines Direction
+      <h1 className="text-[#C9A23F] text-5xl md:text-7xl font-semibold leading-[1.1] tracking-wide mb-8">
+        Insights
       </h1>
 
       <div className="flex justify-center mb-10">
@@ -464,13 +460,14 @@ const OutcomesSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <section ref={ref} className="py-24 bg-[#EAE6DC] relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-[#123845] relative overflow-hidden">
       <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
+      {/* Grid texture */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
-          backgroundImage: "radial-gradient(#C9A23F 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+          backgroundImage:
+            "repeating-linear-gradient(90deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px)",
         }}
       />
 
@@ -482,19 +479,15 @@ const OutcomesSection = () => {
           className="text-center mb-16"
         >
           <GoldLabel>Results We Deliver</GoldLabel>
-          <h2 className="text-[#0F4C5C] text-4xl md:text-5xl font-light mt-2">
+          <h2 className="text-white text-4xl md:text-5xl font-light mt-2">
             Outcomes That{" "}
             <span
-              className="font-semibold italic"
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                color: C.gold,
-              }}
+              className="text-[#C9A23F] font-semibold italic"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               Endure
             </span>
           </h2>
-          <div className="mt-4 w-16 h-[2px] bg-[#C9A23F] mx-auto" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -504,16 +497,16 @@ const OutcomesSection = () => {
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group bg-white/70 border border-[#e6dcc6] rounded-xl p-6 flex gap-5 items-start hover:border-[#C9A23F]/60 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+              className="group border border-[#C9A23F]/15 rounded-xl p-6 flex gap-5 items-start hover:border-[#C9A23F]/40 hover:bg-white/5 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-full border border-[#C9A23F]/30 bg-[#C9A23F]/5 group-hover:border-[#C9A23F] group-hover:bg-[#C9A23F]/10 flex items-center justify-center flex-shrink-0 transition">
-                <Icon path={ICONS[o.icon]} size={22} color={C.teal} />
+              <div className="w-12 h-12 rounded-full border border-[#C9A23F]/30 group-hover:border-[#C9A23F] flex items-center justify-center flex-shrink-0 transition">
+                <Icon path={ICONS[o.icon]} size={22} color="#C9A23F" />
               </div>
               <div>
-                <h3 className="text-[#0F4C5C] font-semibold text-sm mb-1 group-hover:text-[#C9A23F] transition-colors">
+                <h3 className="text-white font-medium text-sm mb-1">
                   {o.label}
                 </h3>
-                <p className="text-[#5b6f77] text-xs leading-relaxed font-light">
+                <p className="text-gray-400 text-xs leading-relaxed font-light">
                   {o.desc}
                 </p>
               </div>
@@ -664,13 +657,13 @@ const CEOSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-24 bg-[#F4F1EA] relative overflow-hidden" id="ceo">
+    <section className="py-24 bg-[#0F4C5C] relative overflow-hidden" id="ceo">
       <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
       {/* Subtle dot-grid texture */}
       <div
-        className="absolute inset-0 opacity-[0.035]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: "radial-gradient(#0F4C5C 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(#C9A23F 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -680,7 +673,7 @@ const CEOSection = () => {
         <div className="grid md:grid-cols-2 gap-10 items-end mb-16">
           <FadeUp>
             <GoldLabel>Chief Executive Officer</GoldLabel>
-            <h2 className="text-[#0F4C5C] text-4xl md:text-5xl font-light mt-2 leading-tight">
+            <h2 className="text-white text-4xl md:text-5xl font-light mt-2 leading-tight">
               CEO Search That{" "}
               <span
                 className="font-semibold italic"
@@ -696,7 +689,7 @@ const CEOSection = () => {
             <div className="mt-5 w-12 h-[2px] bg-[#C9A23F]" />
           </FadeUp>
           <FadeUp delay={0.15}>
-            <p className="text-[#5b6f77] text-sm leading-relaxed">
+            <p className="text-gray-300 text-sm leading-relaxed">
               The Chief Executive Officer shapes direction, performance
               expectations, and culture. The role demands clarity of vision,
               strategic judgement, and the ability to build exceptional
@@ -709,7 +702,7 @@ const CEOSection = () => {
         {/* Vertical timeline — alternating left/right */}
         <div className="relative">
           {/* Central spine */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#C9A23F]/50 via-[#C9A23F]/20 to-transparent hidden md:block -translate-x-1/2" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#C9A23F]/60 via-[#C9A23F]/20 to-transparent hidden md:block -translate-x-1/2" />
 
           <div className="space-y-8">
             {ceoFramework.map((item, i) => {
@@ -736,30 +729,30 @@ const CEOSection = () => {
                       className={`cursor-pointer rounded-2xl p-7 border transition-all duration-300 group
                         ${
                           active === i
-                            ? "bg-[#0F4C5C] border-[#0F4C5C]"
-                            : "bg-white/80 border-[#e6dcc6] hover:border-[#C9A23F]/50 hover:shadow-md"
+                            ? "bg-[#C9A23F] border-[#C9A23F]"
+                            : "bg-white/8 border-white/10 hover:border-[#C9A23F]/50 hover:bg-white/12"
                         }`}
                     >
                       <div className="flex items-start gap-5">
                         <div
                           className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors
-                          ${active === i ? "bg-white/10" : "bg-[#0F4C5C]/5 group-hover:bg-[#0F4C5C]/10"}`}
+                          ${active === i ? "bg-[#0F4C5C]/25" : "bg-white/10 group-hover:bg-white/15"}`}
                         >
                           <Icon
                             path={ICONS[item.icon]}
                             size={22}
-                            color={active === i ? "#C9A23F" : C.teal}
+                            color={active === i ? "#0F4C5C" : "#C9A23F"}
                           />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between mb-1">
                             <span
-                              className={`text-xs tracking-[0.25em] uppercase font-medium ${active === i ? "text-[#C9A23F]/70" : "text-[#C9A23F]/60"}`}
+                              className={`text-xs tracking-[0.25em] uppercase font-medium ${active === i ? "text-[#0F4C5C]/70" : "text-[#C9A23F]/60"}`}
                             >
                               Step {item.step}
                             </span>
                             <svg
-                              className={`w-4 h-4 transition-transform duration-300 ${active === i ? "rotate-45 text-[#C9A23F]" : "text-[#0F4C5C]/30"}`}
+                              className={`w-4 h-4 transition-transform duration-300 ${active === i ? "rotate-45 text-[#0F4C5C]" : "text-[#C9A23F]/40"}`}
                               viewBox="0 0 16 16"
                               fill="none"
                             >
@@ -784,7 +777,7 @@ const CEOSection = () => {
                             </svg>
                           </div>
                           <h3
-                            className={`font-semibold text-base mb-0 transition-colors ${active === i ? "text-white" : "text-[#0F4C5C]"}`}
+                            className={`font-semibold text-base mb-0 transition-colors ${active === i ? "text-[#0F4C5C]" : "text-white"}`}
                           >
                             {item.title}
                           </h3>
@@ -798,7 +791,7 @@ const CEOSection = () => {
                             className="overflow-hidden"
                           >
                             <p
-                              className={`text-sm leading-relaxed mt-3 font-light ${active === i ? "text-gray-300" : "text-[#5b6f77]"}`}
+                              className={`text-sm leading-relaxed mt-3 font-light ${active === i ? "text-[#0F4C5C]/80" : "text-gray-300"}`}
                             >
                               {item.body}
                             </p>
@@ -815,7 +808,7 @@ const CEOSection = () => {
                     {/* Centre dot on spine */}
                     <div className="absolute left-1/2 -translate-x-1/2 top-7 flex flex-col items-center">
                       <div
-                        className={`w-4 h-4 rounded-full border-2 transition-colors duration-300 ${active === i ? "bg-[#C9A23F] border-[#C9A23F]" : "bg-[#F4F1EA] border-[#C9A23F]/50"}`}
+                        className={`w-4 h-4 rounded-full border-2 transition-colors duration-300 ${active === i ? "bg-[#C9A23F] border-[#C9A23F]" : "bg-[#0F4C5C] border-[#C9A23F]/50"}`}
                       />
                     </div>
                   </div>
@@ -827,15 +820,15 @@ const CEOSection = () => {
 
         {/* Quote strip */}
         <FadeUp delay={0.5}>
-          <div className="mt-16 flex flex-col md:flex-row items-center gap-6 border-t border-[#C9A23F]/25 pt-10">
+          <div className="mt-16 flex flex-col md:flex-row items-center gap-6 border-t border-[#C9A23F]/20 pt-10">
             <div
-              className="text-[#C9A23F] text-6xl font-light leading-none opacity-40 flex-shrink-0"
+              className="text-[#C9A23F] text-6xl font-light leading-none opacity-30 flex-shrink-0"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               "
             </div>
             <p
-              className="text-[#0F4C5C] italic text-lg font-light leading-relaxed flex-1"
+              className="text-gray-200 italic text-lg font-light leading-relaxed flex-1"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               A strong CEO and Board partnership remains one of the most
@@ -973,53 +966,35 @@ const CTAStrip = () => {
   return (
     <section
       ref={ref}
-      className="bg-[#EAE6DC] py-20 px-6 relative overflow-hidden"
+      className="bg-[#0F4C5C] py-20 px-6 relative overflow-hidden"
     >
-      <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent opacity-60" />
-      {/* Gold radial glow */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,162,63,0.08) 0%, transparent 70%)",
+            "radial-gradient(circle at 20% 50%, #C9A23F 0%, transparent 50%), radial-gradient(circle at 80% 50%, #C9A23F 0%, transparent 50%)",
         }}
       />
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7 }}
-        className="max-w-2xl mx-auto text-center relative z-10"
+        className="max-w-3xl mx-auto text-center relative z-10"
       >
-        {/* Decorative teal border frame */}
-        <div className="border border-[#0F4C5C]/15 rounded-2xl px-10 py-14 bg-white/50 backdrop-blur relative overflow-hidden">
-          <span className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent" />
-          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent" />
-
-          <div className="w-14 h-14 mx-auto mb-6 opacity-30">
-            <GeometricAccent opacity={1} />
-          </div>
-          <h2 className="text-[#0F4C5C] text-3xl md:text-4xl font-light mb-4">
-            Ready to discuss a{" "}
-            <span
-              className="font-semibold italic"
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                color: C.gold,
-              }}
-            >
-              mandate
-            </span>
-            ?
-          </h2>
-          <p className="text-[#5b6f77] text-sm leading-relaxed mb-8 max-w-md mx-auto">
-            Every engagement begins with a confidential conversation. Speak with
-            one of our advisors to explore how we can serve your leadership
-            needs.
-          </p>
-          <button className="px-10 py-4 border border-[#0F4C5C] text-[#0F4C5C] text-sm tracking-widest uppercase hover:bg-[#0F4C5C] hover:text-white transition-all duration-300 font-medium">
-            Begin a Conversation
-          </button>
+        <div className="w-16 h-16 mx-auto mb-6 opacity-40">
+          <GeometricAccent opacity={1} />
         </div>
+        <h2 className="text-white text-3xl md:text-4xl font-light mb-4">
+          Ready to discuss a{" "}
+          <span className="text-[#C9A23F] font-semibold">mandate</span>?
+        </h2>
+        <p className="text-gray-300 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+          Every engagement begins with a confidential conversation. Speak with
+          one of our advisors to explore how we can serve your leadership needs.
+        </p>
+        <button className="px-10 py-4 border border-[#C9A23F] text-[#C9A23F] text-sm tracking-widest uppercase hover:bg-[#C9A23F] hover:text-[#0F4C5C] transition-all duration-300 font-medium">
+          Begin a Conversation
+        </button>
       </motion.div>
     </section>
   );

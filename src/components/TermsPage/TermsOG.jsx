@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import bg from "../../assets/images/bg.webp";
 
-// ─── Geometric decoration ─────────────────────────────────────────────────────
+// ─── Geometric decoration (shared pattern) ────────────────────────────────────
 const GeometricAccent = ({ opacity = 0.2, color = "#C9A23F" }) => (
   <svg
     viewBox="0 0 200 200"
@@ -52,32 +52,53 @@ const GeometricAccent = ({ opacity = 0.2, color = "#C9A23F" }) => (
   </svg>
 );
 
-const sectionVariants = {
+// ─── Fade animation helper ─────────────────────────────────────────────────────
+const fadeIn = {
   hidden: { opacity: 0, y: 35 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
-const PoliciesPage = () => {
-  const policies = [
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.18 } },
+};
+
+const TermsPage = () => {
+  const sections = [
     {
-      title: "Data Protection & Confidentiality",
-      text: "All executive search engagements are conducted under strict confidentiality agreements. Candidate information, organizational data, and proprietary insights are protected under applicable data protection regulations.",
+      title: "1. Acceptance of Terms",
+      content:
+        "By accessing this website or engaging with PivotEdge Partners, you agree to comply with and be bound by these Terms and Conditions. Continued use of our services constitutes formal acceptance.",
     },
     {
-      title: "Equal Opportunity Commitment",
-      text: "PivotEdge Partners upholds non-discrimination principles across gender, ethnicity, religion, age, disability, and background. Executive selection is based solely on merit and strategic alignment.",
+      title: "2. Scope of Services",
+      content:
+        "PivotEdge Partners provides executive search, leadership advisory, and human capital consulting services. Engagement scope is governed by individual client agreements.",
     },
     {
-      title: "Conflict of Interest Policy",
-      text: "We maintain transparent engagement boundaries to avoid conflicts of interest. Dual representation within competing organizations is governed by ethical screening frameworks.",
+      title: "3. Confidentiality",
+      content:
+        "All client, candidate, and proprietary information exchanged during engagements shall remain confidential and protected under applicable legal frameworks.",
     },
     {
-      title: "Compliance & Regulatory Standards",
-      text: "Our advisory practices align with international HR compliance frameworks and local employment regulations applicable within each operational jurisdiction.",
+      title: "4. Intellectual Property",
+      content:
+        "All methodologies, frameworks, branding materials, and advisory documents remain the exclusive intellectual property of PivotEdge Partners.",
     },
     {
-      title: "Professional Conduct",
-      text: "All consultants adhere to structured executive search methodologies, maintaining integrity, discretion, and accountability throughout the hiring lifecycle.",
+      title: "5. Limitation of Liability",
+      content:
+        "PivotEdge Partners shall not be liable for indirect, incidental, or consequential damages arising from reliance on advisory insights or executive placements.",
+    },
+    {
+      title: "6. Third-Party Links",
+      content:
+        "This website may contain links to third-party resources. We are not responsible for the content, policies, or practices of such external entities.",
+    },
+    {
+      title: "7. Governing Law",
+      content:
+        "These Terms and Conditions shall be governed in accordance with the applicable laws of the jurisdiction in which PivotEdge Partners operates.",
     },
   ];
 
@@ -122,17 +143,17 @@ const PoliciesPage = () => {
             <div className="w-8 h-[1px] bg-[#C9A23F]" />
           </div>
           <h1 className="text-white text-5xl md:text-7xl font-light leading-[1.1] tracking-wide mb-2">
-            Corporate
+            Terms &
           </h1>
           <h1 className="text-[#C9A23F] text-5xl md:text-7xl font-semibold leading-[1.1] tracking-wide mb-8">
-            Policies
+            Conditions
           </h1>
           <div className="flex justify-center mb-10">
             <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-[#C9A23F] to-transparent" />
           </div>
           <p className="text-gray-300 text-lg leading-[1.9] font-light max-w-2xl mx-auto">
-            Ethical governance, compliance standards, and professional integrity
-            define our executive advisory approach.
+            The terms governing your engagement with PivotEdge Partners and use
+            of our advisory services.
           </p>
         </motion.div>
 
@@ -151,14 +172,17 @@ const PoliciesPage = () => {
 
       {/* ══ CONTENT ══ */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
-        <div className="space-y-6">
-          {policies.map((policy, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
+          {sections.map((section, index) => (
             <motion.div
               key={index}
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
+              variants={fadeIn}
               whileHover={{ y: -4 }}
               className="group relative bg-white border border-[#e6dcc6] rounded-2xl p-10 overflow-hidden hover:border-[#C9A23F]/40 hover:shadow-xl transition-all duration-300"
             >
@@ -169,28 +193,22 @@ const PoliciesPage = () => {
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h2 className="text-lg md:text-xl font-semibold text-[#0F4C5C] mb-4 group-hover:text-[#C9A23F] transition-colors duration-300">
-                {policy.title}
+              <h2 className="text-lg font-semibold text-[#0F4C5C] mb-4 group-hover:text-[#C9A23F] transition-colors duration-300">
+                {section.title}
               </h2>
               <p className="text-[#5b6f77] leading-[1.9] text-[15px] font-light">
-                {policy.text}
+                {section.content}
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-20 text-[#0F4C5C]/50 text-sm"
-        >
-          © {new Date().getFullYear()} PivotEdge Partners. Corporate Governance
-          Framework.
-        </motion.p>
+        <p className="mt-20 text-[#0F4C5C]/50 text-sm">
+          © {new Date().getFullYear()} PivotEdge Partners. Legal Framework.
+        </p>
       </div>
     </div>
   );
 };
 
-export default PoliciesPage;
+export default TermsPage;

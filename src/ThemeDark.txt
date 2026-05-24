@@ -1,0 +1,189 @@
+:root {
+  /* ─────────────────────────────────────────
+   COLORS — PRIMARY BRAND
+  ───────────────────────────────────────── */
+
+  --color-teal: #0F4C5C;
+  --color-teal-dark: #123845;
+  --color-gold: #C9A23F;
+
+  /* ─────────────────────────────────────────
+   BACKGROUNDS
+  ───────────────────────────────────────── */
+
+  --color-cream: #F4F1EA;
+  --color-cream-alt: #EAE6DC;
+
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* ─────────────────────────────────────────
+   TEXT COLORS
+  ───────────────────────────────────────── */
+
+  --text-primary: #5B6F77;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+
+  --text-heading: #0F4C5C;
+  --text-light: #D7DDE0;
+
+  /* ─────────────────────────────────────────
+   BORDERS
+  ───────────────────────────────────────── */
+
+  --border-light: #E6DCC6;
+  --border-gold: rgba(201, 162, 63, 0.3);
+  --border-soft: rgba(15, 76, 92, 0.1);
+
+  /* ─────────────────────────────────────────
+   OVERLAYS
+  ───────────────────────────────────────── */
+
+  --overlay-dark: rgba(6, 21, 26, 0.75);
+  --overlay-teal: rgba(15, 76, 92, 0.85);
+  --overlay-light: rgba(255,255,255,0.65);
+
+  /* ─────────────────────────────────────────
+   GRADIENTS
+  ───────────────────────────────────────── */
+
+  --gradient-hero:
+    linear-gradient(to bottom, #0F4C5C, #123845);
+
+  --gradient-gold:
+    linear-gradient(
+      to right,
+      transparent,
+      #C9A23F,
+      transparent
+    );
+
+  /* ─────────────────────────────────────────
+   TYPOGRAPHY
+  ───────────────────────────────────────── */
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Jost", sans-serif;
+
+  /* ─────────────────────────────────────────
+   FONT SIZES
+  ───────────────────────────────────────── */
+
+  --text-xs: 0.68rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+
+  --heading-xl: clamp(4rem, 8vw, 7rem);
+  --heading-lg: clamp(2.5rem, 5vw, 4.5rem);
+  --heading-md: clamp(2rem, 4vw, 3rem);
+
+  /* ─────────────────────────────────────────
+   LETTER SPACING
+  ───────────────────────────────────────── */
+
+  --tracking-wide: 0.2em;
+  --tracking-wider: 0.3em;
+  --tracking-widest: 0.35em;
+
+  /* ─────────────────────────────────────────
+   SPACING
+  ───────────────────────────────────────── */
+
+  --section-padding: 7rem;
+  --container-padding: 1.5rem;
+  --card-padding: 2rem;
+
+  /* ─────────────────────────────────────────
+   BORDER RADIUS
+  ───────────────────────────────────────── */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ─────────────────────────────────────────
+   SHADOWS
+  ───────────────────────────────────────── */
+
+  --shadow-soft:
+    0 10px 40px rgba(0,0,0,0.06);
+
+  --shadow-card:
+    0 4px 20px rgba(0,0,0,0.08);
+
+  /* ─────────────────────────────────────────
+   TRANSITIONS
+  ───────────────────────────────────────── */
+
+  --transition-smooth: all 0.4s ease;
+
+  --transition-luxury:
+    all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+| Usage              | Color             | Hex                      |
+| ------------------ | ----------------- | ------------------------ |
+| Primary Body Text  | Soft Charcoal     | `#5B6F77`                |
+| Secondary Text     | Muted Gray        | `#6B7280`                |
+| Light Neutral Text | Slate Gray        | `#9CA3AF`                |
+| Executive Heading  | Deep Teal         | `#0F4C5C`                |
+| Dark Section Text  | Soft Light Gray   | `#D7DDE0`                |
+| White Overlay Text | Transparent White | `rgba(255,255,255,0.65)` |
+
+
+| Usage              | Color             | Hex                      |
+| ------------------ | ----------------- | ------------------------ |
+| Primary Body Text  | Soft Charcoal     | `#5B6F77`                |
+| Secondary Text     | Muted Gray        | `#6B7280`                |
+| Light Neutral Text | Slate Gray        | `#9CA3AF`                |
+| Executive Heading  | Deep Teal         | `#0F4C5C`                |
+| Dark Section Text  | Soft Light Gray   | `#D7DDE0`                |
+| White Overlay Text | Transparent White | `rgba(255,255,255,0.65)` |
+
+
+| Element             | Style                        |
+| ------------------- | ---------------------------- |
+| Serif Headlines     | Editorial luxury             |
+| Sans Body           | Clean corporate              |
+| Wide Letter Spacing | Executive sophistication     |
+| Uppercase Labels    | Governance / enterprise feel |
+| Thin Font Weights   | Premium minimalism           |
+| Large White Space   | Boardroom/editorial design   |
+
+
+Decorative Language
+
+The UI repeatedly uses:
+
+Gold divider lines
+Geometric executive SVGs
+Subtle grid overlays
+Circular governance motifs
+Strategic diagram styling
+Editorial whitespace
+Thin luxury borders
+Layered dark gradients
+
+Visual Style Direction
+
+The palette strongly communicates:
+
+Luxury corporate
+Executive advisory
+Governance & trust
+Quiet luxury
+Editorial sophistication
+Enterprise professionalism
+Premium boardroom aesthetic
+
+Very similar to:
+
+Egon Zehnder
+Spencer Stuart
+Russell Reynolds
+Korn Ferry
+McKinsey editorial sections
+High-end private equity firms
