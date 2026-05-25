@@ -13,18 +13,18 @@ import Footer from "./components/Footer";
 
 /* ═════════════════ DARK VERSION IMPORTS ═════════════════ */
 
-import Home from "./components/Home/HomeDark";
+// import Home from "./components/Home/HomeDark";
 // import About from "./components/About/AboutDark";
-// import Services from "./components/Servicesection/ServicesDark";
+import Services from "./components/Servicesection/ServicesDark";
 // import Domain from "./components/Domain/DomainDark";
 import ContactPage from "./components/Contact/ContactMapDark.jsx";
 // import Insights from "./components/Insights/InsightsDark.jsx";
 
 /* ═════════════════ KONFERRY LIKE ═════════════════ */
 
-// import Home from "./components/Home/HomeDark";
+import Home from "./components/Home/Home2.jsx";
 import About from "./components/About/AboutDark2";
-import Services from "./components/Servicesection/ServicesDark2";
+// import Services from "./components/Servicesection/ServicesDark2";
 import Domain from "./components/Domain/DomainDark2";
 // import ContactPage from "./components/Contact/ContactMapDark.jsx";
 import Insights from "./components/Insights/InsightsDark2.jsx";
@@ -42,7 +42,7 @@ import TermsPage from "./components/TermsPage/TermsOG";
 // import TermsPage from "./components/TermsPage/TermsPage";
 
 import ScrollToTop from "./components/ScrollToTop";
-// import PivoEdgePartners from "./components/PivotEdgePartners";
+import PivoEdgePartners from "./components/PivotEdgePartners";
 
 function App() {
   return (
@@ -62,7 +62,7 @@ function App() {
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/policies" element={<PoliciesPage />} />
           <Route path="/terms" element={<TermsPage />} />
-          {/* <Route path="/PivoEdgePartners" element={<PivoEdgePartners />} /> */}
+          <Route path="/PivoEdgePartners" element={<PivoEdgePartners />} />
         </Routes>
         <Footer />
       </BrowserRouter>

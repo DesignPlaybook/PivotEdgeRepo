@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
   useInView,
@@ -8,17 +8,75 @@ import {
 } from "framer-motion";
 import bg from "../../assets/images/bg.webp";
 
-// ─── Design Tokens ────────────────────────────────────────────────────────────
-const C = {
-  cream: "#F4F1EA",
-  creamAlt: "#EAE6DC",
+const T = {
+  ivory: "#FAFAF8",
+  cream: "#F5F2EB",
+  warm: "#EDE9E0",
   teal: "#0F4C5C",
+  tealDeep: "#0A3545",
   dark: "#123845",
-  gold: "#C9A23F",
-  muted: "#5b6f77",
+  gold: "#B8922A",
+  goldLight: "#C9A23F",
+  slate: "#4A5C65",
+  muted: "#7A8E96",
+  border: "rgba(15,76,92,0.10)",
+  borderGold: "rgba(184,146,42,0.25)",
+};
+const serif = "'Cormorant Garamond', Georgia, serif";
+const sans = "'Jost', sans-serif";
+
+const Reveal = ({ children, delay = 0, y = 28, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
 };
 
-// ─── Animated counter hook ────────────────────────────────────────────────────
+const Label = ({ children, center = false }) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      justifyContent: center ? "center" : "flex-start",
+      marginBottom: 12,
+    }}
+  >
+    <div style={{ width: 20, height: 1, background: T.goldLight }} />
+    <span
+      style={{
+        fontFamily: sans,
+        fontSize: "0.68rem",
+        letterSpacing: "0.32em",
+        textTransform: "uppercase",
+        color: T.goldLight,
+        fontWeight: 500,
+      }}
+    >
+      {children}
+    </span>
+    <div style={{ width: 20, height: 1, background: T.goldLight }} />
+  </div>
+);
+
+const Divider = () => (
+  <div
+    style={{
+      height: 1,
+      background: `linear-gradient(to right, transparent, ${T.borderGold}, transparent)`,
+    }}
+  />
+);
+
 function useCounter(target, duration = 1800, start = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -27,8 +85,7 @@ function useCounter(target, duration = 1800, start = false) {
     const step = (ts) => {
       if (!startTime) startTime = ts;
       const progress = Math.min((ts - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(ease * target));
+      setCount(Math.floor((1 - Math.pow(1 - progress, 3)) * target));
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -36,667 +93,1140 @@ function useCounter(target, duration = 1800, start = false) {
   return count;
 }
 
-// ─── Shared Fade Animations ───────────────────────────────────────────────────
-const FadeUp = ({ children, delay = 0, className = "" }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 36 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const FadeIn = ({ children, delay = 0, x = 0, className = "" }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, x }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-// ─── Parallax image ───────────────────────────────────────────────────────────
-const ParallaxImage = ({ src, alt = "", className = "" }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  return (
-    <div ref={ref} className={`overflow-hidden ${className}`}>
-      <motion.img
-        src={src}
-        alt={alt}
-        style={{ y }}
-        className="w-full h-full object-cover scale-[1.25]"
-      />
-    </div>
-  );
-};
-
-// ─── Gold section label ───────────────────────────────────────────────────────
-const GoldLabel = ({ children, center = false }) => (
-  <div
-    className={`flex items-center gap-3 mb-3 ${center ? "justify-center" : ""}`}
-  >
-    <div className="w-6 h-[1px] bg-[#C9A23F]" />
-    <span className="text-[#C9A23F] text-[0.68rem] tracking-[0.3em] uppercase font-medium">
-      {children}
-    </span>
-    <div className="w-6 h-[1px] bg-[#C9A23F]" />
-  </div>
-);
-
-// ─── Service data ─────────────────────────────────────────────────────────────
-const services = [
-  {
-    title: "Executive Search",
-    photo:
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=900&q=80&fit=crop",
-    tag: "Retained Search · Board Level",
-    content: `We deliver retained executive search for senior leadership and board-level roles across industries and growth stages. Each mandate begins with a deep understanding of organisational strategy, culture, governance context, and performance objectives.\n\nOur research-led approach evaluates not only experience and track record, but judgement, leadership style, cultural alignment, and long-term impact.`,
-  },
-  {
-    title: "Succession Planning",
-    photo:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80&fit=crop",
-    tag: "Pipeline · Continuity",
-    content: `Leadership continuity is a strategic imperative. We partner with Boards and executive teams to design succession strategies that strengthen bench strength, reduce risk, and preserve institutional knowledge.\n\nOur approach identifies critical roles, evaluates internal readiness, and builds structured leadership pipelines aligned to long-term organisational priorities.`,
-  },
-  {
-    title: "Career Transition",
-    photo:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80&fit=crop",
-    tag: "Transition · Coaching",
-    content: `Organisational evolution often requires difficult leadership decisions. We support organisations in managing transitions with integrity and professionalism.\n\nOur services provide structured guidance, leadership coaching, capability alignment, and strategic repositioning support — helping individuals move forward with clarity.`,
-  },
-  {
-    title: "Interim Management",
-    photo:
-      "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=900&q=80&fit=crop",
-    tag: "Rapid Deployment · Specialised",
-    content: `When leadership gaps arise or specialised expertise is required, interim management provides rapid access to experienced executives.\n\nWe identify seasoned leaders who can step into complex environments, stabilise operations, drive transformation, or deliver specific outcomes within defined timeframes.`,
-  },
-  {
-    title: "Diversity",
-    photo:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&fit=crop",
-    tag: "Inclusion · Governance",
-    content: `Diverse leadership strengthens governance, innovation, and performance. We integrate diversity and inclusion considerations into every search and advisory engagement.\n\nOur approach ensures leadership appointments reflect broader perspectives, varied experiences, and alignment with organisational values.`,
-  },
-];
-
-const functions = [
-  {
-    title: "Boards & Governance",
-    content:
-      "We advise on board composition, governance effectiveness, and director appointments. Our work supports boards in strengthening oversight, strategic guidance, and leadership succession at the highest levels.",
-  },
-  {
-    title: "Chief Executive Officer",
-    content:
-      "The CEO defines direction, culture, and performance expectations. We support organisations in identifying and assessing leaders capable of aligning strategy with execution and sustaining long-term growth.",
-  },
-  {
-    title: "Chief Financial Officer",
-    content:
-      "The CFO has evolved into a strategic partner to the CEO and Board. We identify finance leaders who combine financial stewardship with enterprise-level thinking and governance credibility.",
-  },
-  {
-    title: "Marketing & Sales",
-    content:
-      "Growth leadership demands commercial acumen, customer insight, and execution discipline. We support organisations in appointing Marketing and Sales leaders who translate strategy into measurable revenue impact.",
-  },
-  {
-    title: "Human Resources",
-    content:
-      "Human capital strategy is central to organisational performance. We recruit and advise HR leaders across talent strategy, organisational effectiveness, succession planning, change management, and rewards.",
-  },
-  {
-    title: "Supply Chain",
-    content:
-      "Supply chain leadership is increasingly strategic, balancing efficiency, resilience, risk management, and global complexity. We identify leaders capable of driving operational excellence.",
-  },
-  {
-    title: "CSR & Sustainability",
-    content:
-      "Sustainability and responsible business practices are integral to strategy. We support organisations in appointing leaders who integrate economic performance with environmental stewardship and stakeholder accountability.",
-  },
-  {
-    title: "Artificial Intelligence",
-    content:
-      "AI and advanced analytics are reshaping business models across industries. We identify leaders who can bridge technology and strategy, embed responsible innovation, and translate digital capability into commercial advantage.",
-  },
-];
-
-const stats = [
-  { value: 300, suffix: "+", label: "Placements Made" },
-  { value: 25, suffix: "+", label: "Years of Practice" },
-  { value: 18, suffix: "", label: "Industries Served" },
-  { value: 92, suffix: "%", label: "Retention Rate" },
-];
-
-// ═════════════════════════════════════════════════════════════════════════════
-const Services = () => {
-  const [activeService, setActiveService] = useState(0);
-
-  // Stats bar trigger
-  const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
-
-  const c1 = useCounter(stats[0].value, 1800, statsInView);
-  const c2 = useCounter(stats[1].value, 1800, statsInView);
-  const c3 = useCounter(stats[2].value, 1800, statsInView);
-  const c4 = useCounter(stats[3].value, 1800, statsInView);
-  const counterValues = [c1, c2, c3, c4];
-
-  // Hero parallax
+// ─── HERO ─────────────────────────────────────────────────────────────────────
+const Hero = () => {
   const heroRef = useRef(null);
-  const { scrollYProgress: heroScroll } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroBgY = useTransform(heroScroll, [0, 1], ["0%", "28%"]);
-  const heroContentY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const op = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <div style={{ fontFamily: "'Jost', sans-serif" }}>
-      {/* ══ PARALLAX HERO ══ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[100vh] flex items-end overflow-hidden"
-      >
-        <motion.div className="absolute inset-0" style={{ y: heroBgY }}>
-          <img
-            src={bg}
-            className="w-full h-full object-cover scale-110"
-            alt=""
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F4C5C]/70 via-[#123845]/80 to-[#123845]" />
-        </motion.div>
-
-        {/* Subtle grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+    <section
+      ref={heroRef}
+      style={{
+        minHeight: "88vh",
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "flex-end",
+      }}
+    >
+      <motion.div style={{ y: bgY, position: "absolute", inset: 0 }}>
+        <img
+          src={bg}
+          alt=""
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px),repeating-linear-gradient(90deg,#C9A23F,#C9A23F 1px,transparent 1px,transparent 80px)",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transform: "scale(1.1)",
           }}
         />
-
-        {/* Decorative circles */}
-        <div className="absolute top-16 right-16 hidden lg:block pointer-events-none">
-          <svg
-            viewBox="0 0 200 200"
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(135deg, rgba(10,53,69,0.92) 0%, rgba(15,76,92,0.8) 100%)",
+          }}
+        />
+      </motion.div>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.03,
+          backgroundImage: `repeating-linear-gradient(0deg,${T.goldLight},${T.goldLight} 1px,transparent 1px,transparent 80px),repeating-linear-gradient(90deg,${T.goldLight},${T.goldLight} 1px,transparent 1px,transparent 80px)`,
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 60,
+          right: 80,
+          opacity: 0.1,
+          pointerEvents: "none",
+        }}
+      >
+        <svg
+          viewBox="0 0 200 200"
+          fill="none"
+          style={{ width: 180, height: 180 }}
+        >
+          <circle
+            cx="100"
+            cy="100"
+            r="90"
+            stroke={T.goldLight}
+            strokeWidth="0.5"
+          />
+          <circle
+            cx="100"
+            cy="100"
+            r="65"
+            stroke={T.goldLight}
+            strokeWidth="0.3"
+            strokeDasharray="4 8"
+          />
+          <circle
+            cx="100"
+            cy="100"
+            r="40"
+            stroke={T.goldLight}
+            strokeWidth="0.8"
+          />
+          <polygon
+            points="100,65 118,82 100,99 82,82"
+            stroke={T.goldLight}
+            strokeWidth="0.8"
             fill="none"
-            className="w-48 h-48 opacity-[0.12]"
+          />
+          <circle cx="100" cy="100" r="4" fill={T.goldLight} />
+        </svg>
+      </div>
+      <motion.div
+        style={{
+          y: useTransform(scrollYProgress, [0, 1], ["0%", "40%"]),
+          opacity: op,
+          position: "relative",
+          zIndex: 10,
+          width: "100%",
+          paddingBottom: "7rem",
+          paddingLeft: "clamp(2rem,8vw,7rem)",
+          paddingRight: "clamp(2rem,8vw,7rem)",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              marginBottom: 32,
+            }}
           >
-            <circle
-              cx="100"
-              cy="100"
-              r="90"
-              stroke="#C9A23F"
-              strokeWidth="0.5"
+            <div style={{ width: 32, height: 1, background: T.goldLight }} />
+            <span
+              style={{
+                fontFamily: sans,
+                fontSize: "0.68rem",
+                letterSpacing: "0.35em",
+                textTransform: "uppercase",
+                color: T.goldLight,
+                fontWeight: 500,
+              }}
+            >
+              Advantage Starts Here
+            </span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <h1
+              style={{
+                fontFamily: serif,
+                fontWeight: 300,
+                color: "#fff",
+                fontSize: "clamp(3.5rem,7vw,6rem)",
+                lineHeight: 1.05,
+                margin: 0,
+              }}
+            >
+              Our
+            </h1>
+            <h1
+              style={{
+                fontFamily: serif,
+                fontWeight: 600,
+                fontStyle: "italic",
+                color: T.goldLight,
+                fontSize: "clamp(3.5rem,7vw,6rem)",
+                lineHeight: 1.05,
+                margin: 0,
+              }}
+            >
+              Services
+            </h1>
+          </div>
+          <div
+            style={{
+              width: 120,
+              height: 1,
+              background: `linear-gradient(to right, ${T.goldLight}70, transparent)`,
+              margin: "28px 0",
+            }}
+          />
+          <p
+            style={{
+              fontFamily: sans,
+              fontWeight: 300,
+              fontSize: "1.05rem",
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.9,
+              maxWidth: 520,
+            }}
+          >
+            Structured leadership advisory and executive search solutions
+            aligned to strategy, governance, and long-term performance.
+          </p>
+        </motion.div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+        style={{
+          position: "absolute",
+          bottom: 32,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: sans,
+            fontSize: "0.6rem",
+            letterSpacing: "0.35em",
+            textTransform: "uppercase",
+            color: `${T.goldLight}50`,
+          }}
+        >
+          Scroll
+        </span>
+        <div
+          style={{
+            width: 1,
+            height: 40,
+            background: `linear-gradient(to bottom, ${T.goldLight}60, transparent)`,
+          }}
+        />
+      </motion.div>
+    </section>
+  );
+};
+
+// ─── STATS BAR ────────────────────────────────────────────────────────────────
+const StatsBar = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const stats = [
+    { value: 300, suffix: "+", label: "Placements Made" },
+    { value: 25, suffix: "+", label: "Years of Practice" },
+    { value: 18, suffix: "", label: "Industries Served" },
+    { value: 92, suffix: "%", label: "Retention Rate" },
+  ];
+  const c1 = useCounter(stats[0].value, 1800, inView);
+  const c2 = useCounter(stats[1].value, 1800, inView);
+  const c3 = useCounter(stats[2].value, 1800, inView);
+  const c4 = useCounter(stats[3].value, 1800, inView);
+  const vals = [c1, c2, c3, c4];
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: T.warm,
+        borderBottom: `1px solid ${T.borderGold}`,
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.02,
+          backgroundImage: `radial-gradient(${T.teal} 1px, transparent 1px)`,
+          backgroundSize: "30px 30px",
+        }}
+      />
+      <div
+        style={{
+          maxWidth: 1180,
+          margin: "0 auto",
+          padding: "0 clamp(2rem,8vw,7rem)",
+          display: "grid",
+          gridTemplateColumns: "repeat(4,1fr)",
+          gap: 0,
+        }}
+      >
+        {stats.map((s, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: i * 0.12 }}
+            style={{
+              textAlign: "center",
+              padding: "52px 24px",
+              borderRight: i < 3 ? `1px solid ${T.borderGold}` : "none",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: serif,
+                fontSize: "3.5rem",
+                fontWeight: 600,
+                color: T.goldLight,
+                lineHeight: 1,
+                marginBottom: 8,
+              }}
+            >
+              {vals[i]}
+              <span style={{ fontSize: "2rem" }}>{s.suffix}</span>
+            </div>
+            <div
+              style={{
+                width: 32,
+                height: 1,
+                background: `${T.goldLight}50`,
+                margin: "0 auto 10px",
+              }}
             />
-            <circle
-              cx="100"
-              cy="100"
-              r="65"
-              stroke="#C9A23F"
-              strokeWidth="0.3"
-              strokeDasharray="4 8"
-            />
-            <circle
-              cx="100"
-              cy="100"
-              r="40"
-              stroke="#C9A23F"
-              strokeWidth="0.8"
-            />
-            <polygon
-              points="100,65 118,82 100,99 82,82"
-              stroke="#C9A23F"
-              strokeWidth="0.8"
-              fill="none"
-            />
-            <circle cx="100" cy="100" r="4" fill="#C9A23F" />
-          </svg>
+            <p
+              style={{
+                fontFamily: sans,
+                fontSize: "0.7rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: T.muted,
+                fontWeight: 300,
+              }}
+            >
+              {s.label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ─── PRACTICE AREAS ──────────────────────────────────────────────────────────
+const PracticeAreas = () => {
+  const [active, setActive] = useState(0);
+  const services = [
+    {
+      title: "Executive Search",
+      tag: "Retained Search · Board Level",
+      photo:
+        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=900&q=80",
+      content:
+        "We deliver retained executive search for senior leadership and board-level roles across industries and growth stages. Each mandate begins with a deep understanding of organisational strategy, culture, governance context, and performance objectives.\n\nOur research-led approach evaluates not only experience and track record, but judgement, leadership style, cultural alignment, and long-term impact.",
+    },
+    {
+      title: "Succession Planning",
+      tag: "Pipeline · Continuity",
+      photo:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80",
+      content:
+        "Leadership continuity is a strategic imperative. We partner with Boards and executive teams to design succession strategies that strengthen bench strength, reduce risk, and preserve institutional knowledge.\n\nOur approach identifies critical roles, evaluates internal readiness, and builds structured leadership pipelines aligned to long-term organisational priorities.",
+    },
+    {
+      title: "Career Transition",
+      tag: "Transition · Coaching",
+      photo:
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+      content:
+        "Organisational evolution often requires difficult leadership decisions. We support organisations in managing transitions with integrity and professionalism.\n\nOur services provide structured guidance, leadership coaching, capability alignment, and strategic repositioning support — helping individuals move forward with clarity.",
+    },
+    {
+      title: "Interim Management",
+      tag: "Rapid Deployment · Specialised",
+      photo:
+        "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=900&q=80",
+      content:
+        "When leadership gaps arise or specialised expertise is required, interim management provides rapid access to experienced executives.\n\nWe identify seasoned leaders who can step into complex environments, stabilise operations, drive transformation, or deliver specific outcomes within defined timeframes.",
+    },
+    {
+      title: "Diversity",
+      tag: "Inclusion · Governance",
+      photo:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80",
+      content:
+        "Diverse leadership strengthens governance, innovation, and performance. We integrate diversity and inclusion considerations into every search and advisory engagement.\n\nOur approach ensures leadership appointments reflect broader perspectives, varied experiences, and alignment with organisational values.",
+    },
+  ];
+
+  return (
+    <section style={{ background: T.ivory }}>
+      <Divider />
+      <div
+        style={{
+          maxWidth: 1180,
+          margin: "0 auto",
+          padding: "5rem clamp(2rem,8vw,7rem) 2rem",
+        }}
+      >
+        <Reveal>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              marginBottom: 48,
+              flexWrap: "wrap",
+              gap: 16,
+            }}
+          >
+            <div>
+              <Label>What We Offer</Label>
+              <h2
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 300,
+                  color: T.teal,
+                  fontSize: "clamp(2rem,3.5vw,3rem)",
+                  marginTop: 16,
+                }}
+              >
+                Practice <span style={{ fontWeight: 600 }}>Areas</span>
+              </h2>
+              <div
+                style={{
+                  width: 60,
+                  height: 1,
+                  background: T.goldLight,
+                  marginTop: 16,
+                }}
+              />
+            </div>
+            <p
+              style={{
+                fontFamily: sans,
+                fontWeight: 300,
+                fontSize: "0.88rem",
+                color: T.muted,
+                maxWidth: 320,
+                lineHeight: 1.85,
+              }}
+            >
+              Each engagement is tailored — we do not apply generic frameworks
+              to complex leadership mandates.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "340px 1fr" }}>
+        {/* Left: tabs */}
+        <div
+          style={{
+            background: T.warm,
+            borderRight: `1px solid ${T.borderGold}`,
+            paddingTop: 8,
+            paddingBottom: 8,
+          }}
+        >
+          {services.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              style={{
+                width: "100%",
+                textAlign: "left",
+                padding: "22px 32px",
+                borderLeft:
+                  active === i
+                    ? `3px solid ${T.goldLight}`
+                    : "3px solid transparent",
+                background: active === i ? "#fff" : "transparent",
+                cursor: "pointer",
+                transition: "all 0.25s",
+                borderBottom: "none",
+                borderTop: "none",
+                borderRight: "none",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontWeight: 600,
+                  fontSize: "0.88rem",
+                  letterSpacing: "0.03em",
+                  color: active === i ? T.goldLight : T.teal,
+                  marginBottom: 4,
+                  transition: "color 0.25s",
+                }}
+              >
+                {s.title}
+              </p>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: T.muted,
+                  fontWeight: 300,
+                }}
+              >
+                {s.tag}
+              </p>
+            </button>
+          ))}
         </div>
 
-        {/* Hero content — bottom editorial layout */}
-        <motion.div
-          style={{ y: heroContentY, opacity: heroOpacity }}
-          className="relative z-10 w-full pb-28 px-8 md:px-16 lg:px-24"
+        {/* Right: full-bleed photo with text */}
+        <div
+          style={{ position: "relative", minHeight: 520, overflow: "hidden" }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-[1px] bg-[#C9A23F]" />
-              <span className="text-[#C9A23F] text-xs tracking-[0.35em] uppercase font-medium">
-                Advantage Starts Here
-              </span>
-            </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              style={{ position: "absolute", inset: 0 }}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <img
+                src={services[active].photo}
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to right, rgba(6,21,26,0.88) 45%, rgba(6,21,26,0.5) 100%)",
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`t-${active}`}
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                padding: "3rem 3.5rem",
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  color: T.goldLight,
+                  marginBottom: 12,
+                  fontWeight: 500,
+                }}
+              >
+                {String(active + 1).padStart(2, "0")} /{" "}
+                {String(services.length).padStart(2, "0")}
+              </p>
+              <h3
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 300,
+                  color: "#fff",
+                  fontSize: "2.6rem",
+                  lineHeight: 1.12,
+                  marginBottom: 8,
+                }}
+              >
+                {services[active].title}
+              </h3>
+              <div
+                style={{
+                  width: 40,
+                  height: 1,
+                  background: T.goldLight,
+                  marginBottom: 20,
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontWeight: 300,
+                  fontSize: "0.9rem",
+                  color: "rgba(255,255,255,0.7)",
+                  lineHeight: 1.9,
+                  maxWidth: 520,
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {services[active].content}
+              </p>
+              <div style={{ display: "flex", gap: 12, marginTop: 32 }}>
+                {[
+                  { dir: "prev", dis: active === 0 },
+                  { dir: "next", dis: active === services.length - 1 },
+                ].map((b) => (
+                  <button
+                    key={b.dir}
+                    disabled={b.dis}
+                    onClick={() =>
+                      setActive((a) =>
+                        b.dir === "prev"
+                          ? Math.max(0, a - 1)
+                          : Math.min(services.length - 1, a + 1),
+                      )
+                    }
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: "50%",
+                      border: `1px solid rgba(255,255,255,0.2)`,
+                      background: "transparent",
+                      cursor: b.dis ? "not-allowed" : "pointer",
+                      opacity: b.dis ? 0.25 : 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      transition: "all 0.25s",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!b.dis) {
+                        e.currentTarget.style.borderColor = T.goldLight;
+                        e.currentTarget.style.background = `${T.goldLight}18`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor =
+                        "rgba(255,255,255,0.2)";
+                      e.currentTarget.style.background = "transparent";
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      style={{ width: 14, height: 14 }}
+                    >
+                      <polyline
+                        points={
+                          b.dir === "prev"
+                            ? "12,4 6,10 12,16"
+                            : "8,4 14,10 8,16"
+                        }
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-16">
-              <div>
-                <h1 className="text-white text-6xl md:text-8xl font-light leading-[1.05] mb-3">
-                  Our
-                </h1>
-                <h1
-                  className="text-[#C9A23F] text-6xl md:text-8xl font-semibold leading-[1.05]"
+// ─── PROCESS ─────────────────────────────────────────────────────────────────
+const Process = () => {
+  const steps = [
+    {
+      n: "01",
+      label: "Discovery",
+      desc: "Deep organisational briefing and mandate alignment.",
+    },
+    {
+      n: "02",
+      label: "Research",
+      desc: "Market mapping and candidate universe construction.",
+    },
+    {
+      n: "03",
+      label: "Assessment",
+      desc: "Rigorous evaluation and shortlisting against mandate.",
+    },
+    {
+      n: "04",
+      label: "Presentation",
+      desc: "Curated slate with comprehensive executive profiles.",
+    },
+    {
+      n: "05",
+      label: "Placement",
+      desc: "Offer management, onboarding advisory, and transition support.",
+    },
+  ];
+
+  return (
+    <section style={{ background: T.cream }}>
+      <Divider />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          minHeight: 480,
+        }}
+      >
+        {/* Image */}
+        <div
+          style={{ position: "relative", minHeight: 400, overflow: "hidden" }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1200&q=80"
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              position: "absolute",
+              inset: 0,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to right, rgba(6,21,26,0.88) 0%, rgba(6,21,26,0.4) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              padding: "3rem",
+            }}
+          >
+            <Reveal x={-30}>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  color: T.goldLight,
+                  marginBottom: 16,
+                  fontWeight: 500,
+                }}
+              >
+                How We Work
+              </p>
+              <h2
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 300,
+                  color: "#fff",
+                  fontSize: "clamp(2rem,3.5vw,3rem)",
+                  lineHeight: 1.15,
+                }}
+              >
+                Five Stages.
+                <br />
+                <span style={{ fontStyle: "italic", color: T.goldLight }}>
+                  One Outcome.
+                </span>
+              </h2>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Steps */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "3.5rem clamp(2rem,4vw,4rem)",
+          }}
+        >
+          {steps.map((s, i) => (
+            <Reveal key={i} delay={i * 0.07}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 20,
+                  padding: "18px 0",
+                  borderBottom: `1px solid ${T.borderGold}`,
+                  transition: "all 0.3s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.paddingLeft = "8px")
+                }
+                onMouseLeave={(e) => (e.currentTarget.style.paddingLeft = "0")}
+              >
+                <span
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontStyle: "italic",
+                    fontFamily: serif,
+                    fontSize: "1.5rem",
+                    fontWeight: 300,
+                    color: `${T.goldLight}50`,
+                    flexShrink: 0,
+                    width: 36,
+                    textAlign: "right",
                   }}
                 >
-                  Services
-                </h1>
+                  {s.n}
+                </span>
+                <div
+                  style={{
+                    width: 1,
+                    height: 32,
+                    background: T.borderGold,
+                    flexShrink: 0,
+                    transition: "background 0.3s",
+                  }}
+                />
+                <div>
+                  <p
+                    style={{
+                      fontFamily: sans,
+                      fontWeight: 600,
+                      fontSize: "0.88rem",
+                      color: T.teal,
+                      marginBottom: 4,
+                    }}
+                  >
+                    {s.label}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: sans,
+                      fontWeight: 300,
+                      fontSize: "0.8rem",
+                      color: T.muted,
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {s.desc}
+                  </p>
+                </div>
               </div>
-              <div className="max-w-lg">
-                <div className="w-32 h-[1px] bg-gradient-to-r from-[#C9A23F]/70 to-transparent mb-6" />
-                <p className="text-gray-300 text-lg leading-[1.9] font-light">
-                  Structured leadership advisory and executive search solutions
-                  aligned to strategy, governance, and long-term performance.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
-        >
-          <span className="text-[#C9A23F]/40 text-[10px] tracking-[0.35em] uppercase">
-            Scroll
-          </span>
-          <div className="w-[1px] h-10 bg-gradient-to-b from-[#C9A23F]/60 to-transparent" />
-        </motion.div>
-      </section>
-
-      {/* ══ ANIMATED STATS BAR ══ */}
-      <section
-        ref={statsRef}
-        className="bg-[#EAE6DC] border-b border-[#e6dcc6] relative overflow-hidden"
-      >
-        <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C9A23F]/60 to-transparent" />
-        {/* Background watermark text */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
-          <span
-            className="text-[18rem] font-bold text-[#0F4C5C]/[0.025] leading-none"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            25+
-          </span>
+            </Reveal>
+          ))}
         </div>
+      </div>
+    </section>
+  );
+};
 
-        <div className="max-w-6xl mx-auto px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
-          {stats.map((s, i) => (
+// ─── FUNCTIONAL COVERAGE ─────────────────────────────────────────────────────
+const FunctionalCoverage = () => {
+  const functions = [
+    {
+      title: "Boards & Governance",
+      content:
+        "We advise on board composition, governance effectiveness, and director appointments. Our work supports boards in strengthening oversight, strategic guidance, and leadership succession at the highest levels.",
+    },
+    {
+      title: "Chief Executive Officer",
+      content:
+        "The CEO defines direction, culture, and performance expectations. We support organisations in identifying and assessing leaders capable of aligning strategy with execution and sustaining long-term growth.",
+    },
+    {
+      title: "Chief Financial Officer",
+      content:
+        "The CFO has evolved into a strategic partner to the CEO and Board. We identify finance leaders who combine financial stewardship with enterprise-level thinking and governance credibility.",
+    },
+    {
+      title: "Marketing & Sales",
+      content:
+        "Growth leadership demands commercial acumen, customer insight, and execution discipline. We appoint Marketing and Sales leaders who translate strategy into measurable revenue impact.",
+    },
+    {
+      title: "Human Resources",
+      content:
+        "Human capital strategy is central to organisational performance. We recruit HR leaders across talent strategy, organisational effectiveness, succession planning, and change management.",
+    },
+    {
+      title: "Supply Chain",
+      content:
+        "Supply chain leadership is increasingly strategic, balancing efficiency, resilience, and risk management. We identify leaders capable of driving operational excellence.",
+    },
+    {
+      title: "CSR & Sustainability",
+      content:
+        "We support organisations in appointing leaders who integrate economic performance with environmental stewardship and stakeholder accountability.",
+    },
+    {
+      title: "Artificial Intelligence",
+      content:
+        "We identify leaders who can bridge technology and strategy, embed responsible innovation, and translate digital capability into commercial advantage.",
+    },
+  ];
+
+  return (
+    <section
+      style={{ background: T.ivory, padding: "6rem clamp(2rem,8vw,7rem)" }}
+    >
+      <Divider />
+      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+        <Reveal>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "3rem",
+              alignItems: "end",
+              marginBottom: 56,
+            }}
+          >
+            <div>
+              <Label>Expertise</Label>
+              <h2
+                style={{
+                  fontFamily: serif,
+                  fontWeight: 300,
+                  color: T.teal,
+                  fontSize: "clamp(2rem,3.5vw,3rem)",
+                  marginTop: 16,
+                }}
+              >
+                Functional <span style={{ fontWeight: 600 }}>Coverage</span>
+              </h2>
+              <div
+                style={{
+                  width: 60,
+                  height: 1,
+                  background: T.goldLight,
+                  marginTop: 16,
+                }}
+              />
+            </div>
+            <p
+              style={{
+                fontFamily: sans,
+                fontWeight: 300,
+                fontSize: "0.92rem",
+                color: T.muted,
+                lineHeight: 1.85,
+              }}
+            >
+              Our practice spans all major executive functions — enabling us to
+              serve complex, cross-functional leadership mandates with genuine
+              sector depth.
+            </p>
+          </div>
+        </Reveal>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            border: `1px solid ${T.border}`,
+            background: "#fff",
+          }}
+        >
+          {functions.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={statsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                delay: i * 0.12,
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
+              style={{
+                padding: "2rem 2.2rem",
+                borderRight: i % 2 === 0 ? `1px solid ${T.border}` : "none",
+                borderBottom:
+                  i < functions.length - 2 ? `1px solid ${T.border}` : "none",
+                position: "relative",
+                transition: "background 0.3s",
+                cursor: "default",
               }}
-              className="flex flex-col items-center text-center"
+              onMouseEnter={(e) => (e.currentTarget.style.background = T.cream)}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
             >
-              <div className="flex items-baseline gap-1 mb-2">
-                <span
-                  className="text-5xl md:text-6xl font-semibold text-[#C9A23F]"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  {counterValues[i]}
-                </span>
-                <span className="text-[#C9A23F] text-3xl font-light">
-                  {s.suffix}
-                </span>
-              </div>
-              <div className="w-8 h-[1px] bg-[#C9A23F]/40 mb-2" />
-              <p className="text-[#5b6f77] text-xs tracking-[0.2em] uppercase font-light">
-                {s.label}
+              <span
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: 0,
+                  height: 3,
+                  background: T.goldLight,
+                  transition: "width 0.4s",
+                }}
+                ref={(el) => {
+                  if (el) {
+                    const p = el.parentElement;
+                    p.addEventListener(
+                      "mouseenter",
+                      () => (el.style.width = "100%"),
+                    );
+                    p.addEventListener(
+                      "mouseleave",
+                      () => (el.style.width = "0"),
+                    );
+                  }
+                }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 20,
+                  fontFamily: serif,
+                  fontSize: "3.5rem",
+                  fontWeight: 700,
+                  color: `${T.teal}04`,
+                  lineHeight: 1,
+                }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3
+                style={{
+                  fontFamily: sans,
+                  fontWeight: 600,
+                  fontSize: "0.88rem",
+                  color: T.teal,
+                  marginBottom: 10,
+                }}
+              >
+                {item.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontWeight: 300,
+                  fontSize: "0.82rem",
+                  color: T.muted,
+                  lineHeight: 1.85,
+                  paddingRight: 24,
+                }}
+              >
+                {item.content}
               </p>
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* ══ PRACTICE AREAS — full-bleed photo selector ══ */}
-      <section className="bg-[#F4F1EA] relative overflow-hidden">
-        <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C9A23F]/60 to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-6 pt-24 pb-10">
-          <FadeUp>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-              <div>
-                <GoldLabel>What We Offer</GoldLabel>
-                <h2 className="text-[#0F4C5C] text-4xl md:text-5xl font-light mt-2">
-                  Practice <span className="font-semibold">Areas</span>
-                </h2>
-                <div className="mt-4 w-16 h-[2px] bg-[#C9A23F]" />
-              </div>
-              <p className="text-[#5b6f77] text-sm leading-relaxed max-w-sm">
-                Each engagement is tailored — we do not apply generic frameworks
-                to complex leadership mandates.
-              </p>
-            </div>
-          </FadeUp>
-        </div>
-
-        {/* Full-bleed service photo + sidebar */}
-        <div className="grid lg:grid-cols-[380px_1fr]">
-          {/* Left: service list */}
-          <div className="bg-[#EAE6DC] border-r border-[#e6dcc6] py-8 flex flex-col">
-            {services.map((s, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveService(i)}
-                className={`group w-full text-left px-8 py-5 border-l-[3px] transition-all duration-300 relative
-                  ${
-                    activeService === i
-                      ? "border-l-[#C9A23F] bg-white"
-                      : "border-l-transparent hover:border-l-[#C9A23F]/40 hover:bg-white/60"
-                  }`}
-              >
-                <p
-                  className={`text-sm font-semibold tracking-wide transition-colors ${activeService === i ? "text-[#C9A23F]" : "text-[#0F4C5C] group-hover:text-[#C9A23F]"}`}
-                >
-                  {s.title}
-                </p>
-                <p className="text-[#5b6f77] text-[10px] tracking-widest uppercase mt-0.5">
-                  {s.tag}
-                </p>
-                {activeService === i && (
-                  <motion.span
-                    layoutId="service-underline"
-                    className="absolute bottom-0 left-8 right-8 h-[1px] bg-[#C9A23F]/30"
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/* Right: full-bleed photo with text overlay */}
-          <div className="relative min-h-[560px] overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeService}
-                className="absolute inset-0"
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <img
-                  src={services[activeService].photo}
-                  alt={services[activeService].title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#06151a]/85 via-[#06151a]/60 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#06151a]/70 via-transparent to-transparent" />
-              </motion.div>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`txt-${activeService}`}
-                className="absolute inset-0 flex flex-col justify-end p-10 md:p-14"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <p className="text-[#C9A23F] text-xs tracking-[0.3em] uppercase mb-3 font-medium">
-                  {String(activeService + 1).padStart(2, "0")} /{" "}
-                  {String(services.length).padStart(2, "0")}
-                </p>
-                <h3
-                  className="text-white text-4xl md:text-5xl font-light mb-3 leading-tight"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  {services[activeService].title}
-                </h3>
-                <div className="w-10 h-[2px] bg-[#C9A23F] mb-6" />
-                <p className="text-gray-200 text-sm leading-[1.95] font-light whitespace-pre-line max-w-xl">
-                  {services[activeService].content}
-                </p>
-
-                {/* Nav */}
-                <div className="flex gap-3 mt-8">
-                  {[
-                    { dir: "prev", dis: activeService === 0 },
-                    { dir: "next", dis: activeService === services.length - 1 },
-                  ].map((b) => (
-                    <button
-                      key={b.dir}
-                      onClick={() =>
-                        setActiveService((a) =>
-                          b.dir === "prev"
-                            ? Math.max(0, a - 1)
-                            : Math.min(services.length - 1, a + 1),
-                        )
-                      }
-                      disabled={b.dis}
-                      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-[#C9A23F] hover:bg-[#C9A23F]/10 transition disabled:opacity-20 text-white cursor-pointer"
-                    >
-                      <svg viewBox="0 0 20 20" className="w-4 h-4" fill="none">
-                        <polyline
-                          points={
-                            b.dir === "prev"
-                              ? "12,4 6,10 12,16"
-                              : "8,4 14,10 8,16"
-                          }
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </button>
-                  ))}
-                  <div className="flex gap-1.5 ml-2 items-center">
-                    {services.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setActiveService(i)}
-                        className={`h-1 rounded-full transition-all duration-300 cursor-pointer
-                          ${activeService === i ? "w-6 bg-[#C9A23F]" : "w-1.5 bg-white/30 hover:bg-white/60"}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
-
-      {/* ══ PROCESS — editorial strip with image ══ */}
-      <section className="relative overflow-hidden">
-        <div className="grid lg:grid-cols-2 min-h-[60vh]">
-          {/* Dark image panel */}
-          <FadeIn x={-40} className="relative min-h-[400px]">
-            <ParallaxImage
-              src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1200&q=80&fit=crop"
-              alt="Process"
-              className="absolute inset-0 w-full h-full"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#06151a]/85 to-[#06151a]/40" />
-            <div className="absolute inset-0 flex items-center p-12">
-              <div>
-                <p className="text-[#C9A23F] text-xs tracking-[0.3em] uppercase mb-4 font-medium">
-                  How We Work
-                </p>
-                <h2
-                  className="text-white text-4xl md:text-5xl font-light leading-tight"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  Five Stages.
-                  <br />
-                  <span className="text-[#C9A23F] italic">One Outcome.</span>
-                </h2>
-              </div>
-            </div>
-          </FadeIn>
-
-          {/* Process steps */}
-          <div className="bg-[#EAE6DC] flex flex-col justify-center py-16 px-10 md:px-14">
-            {[
-              {
-                n: "01",
-                label: "Discovery",
-                desc: "Deep organisational briefing and mandate alignment.",
-              },
-              {
-                n: "02",
-                label: "Research",
-                desc: "Market mapping and candidate universe construction.",
-              },
-              {
-                n: "03",
-                label: "Assessment",
-                desc: "Rigorous evaluation and shortlisting against mandate.",
-              },
-              {
-                n: "04",
-                label: "Presentation",
-                desc: "Curated slate with comprehensive executive profiles.",
-              },
-              {
-                n: "05",
-                label: "Placement",
-                desc: "Offer management, onboarding advisory, and transition support.",
-              },
-            ].map((step, i) => (
-              <FadeUp key={i} delay={i * 0.07}>
-                <div className="group flex items-center gap-5 py-4 border-b border-[#e6dcc6] last:border-b-0 hover:pl-2 transition-all duration-300">
-                  <span
-                    className="text-[#C9A23F]/30 text-2xl font-light flex-shrink-0 w-10 text-right"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    {step.n}
-                  </span>
-                  <div className="w-[1px] h-8 bg-[#e6dcc6] group-hover:bg-[#C9A23F]/50 transition-colors" />
-                  <div>
-                    <p className="text-[#0F4C5C] text-sm font-semibold group-hover:text-[#C9A23F] transition-colors">
-                      {step.label}
-                    </p>
-                    <p className="text-[#5b6f77] text-xs font-light mt-0.5">
-                      {step.desc}
-                    </p>
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ FUNCTIONAL COVERAGE — cream bg, editorial grid ══ */}
-      <section className="bg-[#F4F1EA] py-24 relative overflow-hidden">
-        <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C9A23F]/60 to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeUp>
-            <div className="grid md:grid-cols-2 gap-10 items-end mb-16">
-              <div>
-                <GoldLabel>Expertise</GoldLabel>
-                <h2 className="text-[#0F4C5C] text-4xl md:text-5xl font-light mt-2">
-                  Functional <span className="font-semibold">Coverage</span>
-                </h2>
-                <div className="mt-4 w-16 h-[2px] bg-[#C9A23F]" />
-              </div>
-              <p className="text-[#5b6f77] text-sm leading-relaxed">
-                Our practice spans all major executive functions — enabling us
-                to serve complex, cross-functional leadership mandates with
-                genuine sector depth.
-              </p>
-            </div>
-          </FadeUp>
-
-          <div className="grid md:grid-cols-2 gap-0 border border-[#e6dcc6] rounded-2xl overflow-hidden bg-white/40">
-            {functions.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-                className={`group relative p-8 border-[#e6dcc6] hover:bg-white transition-colors duration-300
-                  ${i % 2 === 0 ? "border-r" : ""}
-                  ${i < functions.length - 2 ? "border-b" : ""}`}
-              >
-                <span className="absolute left-0 top-0 h-0 w-[3px] bg-[#C9A23F] group-hover:h-full transition-all duration-300 rounded-r" />
-                {/* Step number watermark */}
-                <span
-                  className="absolute top-4 right-5 text-5xl font-bold text-[#0F4C5C]/[0.04] leading-none select-none"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-[#0F4C5C] font-semibold text-base mb-2 group-hover:text-[#C9A23F] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-[#5b6f77] text-sm leading-[1.8] font-light pr-8">
-                  {item.content}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ FULL-BLEED CLOSING PHOTO STRIP ══ */}
-      <section className="relative min-h-[50vh] overflow-hidden">
-        <ParallaxImage
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1800&q=80&fit=crop"
-          alt="Leadership team"
-          className="absolute inset-0 w-full h-full"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#06151a]/60 via-[#123845]/70 to-[#123845]/90" />
-        <div className="relative z-10 flex items-center justify-center min-h-[50vh] px-8 py-24 text-center">
-          <FadeUp>
-            <p className="text-[#C9A23F] text-xs tracking-[0.35em] uppercase mb-6 font-medium">
-              The PivotEdge Difference
-            </p>
-            <blockquote
-              className="text-white text-3xl md:text-5xl font-light leading-[1.3] max-w-3xl mx-auto"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              "Leadership appointments are among the most consequential
-              decisions an organisation makes."
-            </blockquote>
-            <div className="mt-6 w-16 h-[1px] bg-[#C9A23F]/60 mx-auto" />
-            <p className="text-[#C9A23F] text-[0.68rem] tracking-[0.3em] uppercase mt-4 font-medium">
-              — PivotEdge Partners
-            </p>
-          </FadeUp>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default Services;
+// ─── CLOSING STRIP ────────────────────────────────────────────────────────────
+const ClosingStrip = () => (
+  <section
+    style={{ position: "relative", minHeight: "40vh", overflow: "hidden" }}
+  >
+    <img
+      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1800&q=80"
+      alt=""
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background:
+          "linear-gradient(to bottom, rgba(6,21,26,0.65) 0%, rgba(18,56,69,0.88) 100%)",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 1,
+        background: `${T.goldLight}40`,
+      }}
+    />
+    <div
+      style={{
+        position: "relative",
+        zIndex: 10,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "40vh",
+        padding: "5rem 2rem",
+        textAlign: "center",
+      }}
+    >
+      <Reveal>
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "0.68rem",
+            letterSpacing: "0.35em",
+            textTransform: "uppercase",
+            color: T.goldLight,
+            marginBottom: 24,
+            fontWeight: 500,
+          }}
+        >
+          The PivotEdge Difference
+        </p>
+        <blockquote
+          style={{
+            fontFamily: serif,
+            fontWeight: 300,
+            color: "#fff",
+            fontSize: "clamp(1.6rem,3vw,2.6rem)",
+            lineHeight: 1.35,
+            maxWidth: 720,
+            margin: "0 auto 20px",
+          }}
+        >
+          "Leadership appointments are among the most consequential decisions an
+          organisation makes."
+        </blockquote>
+        <div
+          style={{
+            width: 64,
+            height: 1,
+            background: `${T.goldLight}60`,
+            margin: "0 auto 12px",
+          }}
+        />
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "0.65rem",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            color: T.goldLight,
+            fontWeight: 500,
+          }}
+        >
+          — PivotEdge Partners
+        </p>
+      </Reveal>
+    </div>
+  </section>
+);
+
+export default function Services() {
+  return (
+    <div style={{ fontFamily: sans }}>
+      <Hero />
+      <StatsBar />
+      <PracticeAreas />
+      <Process />
+      <FunctionalCoverage />
+      <ClosingStrip />
+    </div>
+  );
+}
